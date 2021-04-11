@@ -23,7 +23,7 @@ public class Menu {
 			
 		}
 		else if (start == 2) {
-			
+			System.exit(0); //close the program
 		}
 		else {
 			System.out.println("There is no option available for the entered value");
