@@ -3,8 +3,6 @@ package model;
 public class GameGrid {
 	private int rows;
 	private int columns;
-	private int snakes;
-	private int stairs;
 
 	public GameGrid(int rows, int columns) {
 		super();
