@@ -3,12 +3,12 @@ package ui;
 import java.util.Scanner;
 
 import model.SnakesAndLadders;
+import model.GameGrid;
 
 public class Main {
 	
 	public final static Scanner sc = new Scanner(System.in);
-	
-	private SnakesAndLadders game;
+	private static SnakesAndLadders game;
 	private static Menu menu;
 	
 	public static void main(String[] args) {
@@ -16,6 +16,9 @@ public class Main {
 		Main ppal = new Main();
 		
 		menu.displayOptions();
+		
+		GameGrid gameGrid = new GameGrid(10,10);
+		System.out.println(gameGrid);
 		
 		//m.menuOptions();
 	}
@@ -25,6 +28,5 @@ public class Main {
 		menu = new Menu(game);
 		
 	}
-	
 
 }
