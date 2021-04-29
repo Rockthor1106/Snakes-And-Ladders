@@ -11,15 +11,19 @@ public class GameGrid {
 		createMatrix();
 	}
 	
+	public Cell getFirst() {
+		return first;
+	}
+	
 	private void createMatrix() {
 		if (numRows % 2 == 0) {
 			
-			first = new Cell(numRows * numColumns);
+			first = new Cell(1, 1,numRows * numColumns);
 			createRow(1, 1, first);
 		} 
 		else {
 			
-			first = new Cell((numRows * numColumns - (numColumns - 1)));
+			first = new Cell(1, 1, numRows * numColumns - (numColumns - 1));
 			createRow2(1, 1, first);
 		}
 	}
@@ -31,7 +35,7 @@ public class GameGrid {
 
 			if (i % 2 != 0) {
 					
-				Cell downFirstRow = new Cell(currentFirstRow.getNumber() - (2 * numColumns - 1));
+				Cell downFirstRow = new Cell(i + 1, j, currentFirstRow.getNumber() - (2 * numColumns - 1));
 				downFirstRow.setUp(currentFirstRow);
 				currentFirstRow.setDown(downFirstRow);
 				createRow(i + 1, j, downFirstRow);
@@ -39,7 +43,7 @@ public class GameGrid {
 			} 
 			else {
 					
-				Cell downFirstRow = new Cell(currentFirstRow.getNumber() - 1);
+				Cell downFirstRow = new Cell(i + 1, j, currentFirstRow.getNumber() - 1);
 				downFirstRow.setUp(currentFirstRow);
 				currentFirstRow.setDown(downFirstRow);
 				createRow(i + 1, j, downFirstRow);
@@ -52,7 +56,7 @@ public class GameGrid {
 				
 			if (i % 2 == 0) {
 					
-				Cell current = new Cell(prev.getNumber() + 1);
+				Cell current = new Cell(i, j, prev.getNumber() + 1);
 				current.setPrevious(prev);
 				prev.setNext(current);
 
@@ -66,7 +70,7 @@ public class GameGrid {
 			} 
 			else {
 					
-				Cell current = new Cell(prev.getNumber() - 1);
+				Cell current = new Cell(i, j, prev.getNumber() - 1);
 				current.setPrevious(prev);
 				prev.setNext(current);
 
@@ -89,7 +93,7 @@ public class GameGrid {
 				
 			if (i % 2 != 0) {
 					
-				Cell downFirstRow = new Cell(currentFirstRow.getNumber() - 1);
+				Cell downFirstRow = new Cell(i + 1, j, currentFirstRow.getNumber() - 1);
 				downFirstRow.setUp(currentFirstRow);
 				currentFirstRow.setDown(downFirstRow);
 				createRow2(i + 1, j, downFirstRow);
@@ -97,7 +101,7 @@ public class GameGrid {
 			}
 			else {
 					
-				Cell downFirstRow = new Cell(currentFirstRow.getNumber() - (2 * numColumns - 1));
+				Cell downFirstRow = new Cell(i + 1, j, currentFirstRow.getNumber() - (2 * numColumns - 1));
 				downFirstRow.setUp(currentFirstRow);
 				currentFirstRow.setDown(downFirstRow);
 				createRow2(i + 1, j, downFirstRow);
@@ -111,7 +115,7 @@ public class GameGrid {
 				
 			if (i % 2 == 0) {
 					
-				Cell current = new Cell(prev.getNumber() - 1);
+				Cell current = new Cell(i, j, prev.getNumber() - 1);
 				current.setPrevious(prev);
 				prev.setNext(current);
 
@@ -125,7 +129,7 @@ public class GameGrid {
 			} 
 			else {
 					
-				Cell current = new Cell(prev.getNumber() + 1);
+				Cell current = new Cell(i, j, prev.getNumber() + 1);
 				current.setPrevious(prev);
 				prev.setNext(current);
 
@@ -165,4 +169,34 @@ public class GameGrid {
 		return msg;
 	}
 	
+	//Methods to search -----------------------------------------------------------------------
+	public Cell searchInRows(int number, Cell first) {
+		Cell foundNode = null;
+		foundNode = searchInCols(number, first.getNext());
+		if(foundNode == null){
+			if (first.getNumber() == number ) {
+				foundNode = first;
+
+			} 
+			else if (first.getDown() != null) {
+				foundNode = searchInRows(number, first.getDown());
+			}
+		}
+		
+			
+		return foundNode;
+	}
+
+	private Cell searchInCols(int number, Cell next) {
+		Cell foundNode = null;
+			if (next.getNumber() == number) {
+				foundNode = next;
+			}
+			else if (next.getNext() != null) {
+				foundNode = searchInCols(number, next.getNext());
+
+			}
+		return foundNode;
+	}
+    //-----------------------------------------------------------------------------------------
 }

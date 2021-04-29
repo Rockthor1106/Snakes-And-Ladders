@@ -4,18 +4,31 @@ public class Cell{
 	
 	private int number;
 	
+	private int row;
+	private int col;
 	private Cell next;
 	private Cell previous;
 	private Cell up;	
 	private Cell down;
 	
-	public Cell(int number) {
+	public Cell(int row, int col, int number) {
+		this.row = row;
+		this.col = col;
 		this.number = number;
 	}
 	
 	public int getNumber() {
 		return number;
 	}
+	
+	public int getRow() {
+		return row;
+	}
+
+	public int getCol() {
+		return col;
+	}
+    
 	
 	public Cell getNext() {
 		return next;
@@ -59,5 +72,4 @@ public class Cell{
 		}
 		return msg;
 	}
-    
 }
