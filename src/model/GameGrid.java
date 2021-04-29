@@ -141,6 +141,23 @@ public class GameGrid {
 	}
     //-----------------------------------------------------------------------------------------
 	
+	public Cell searchCell(int number) {
+		if(number==1) {
+			return first;
+		}else {
+			return searchCell(first.getNext(), number);
+		}
+	}
+	
+	public Cell searchCell(Cell current, int number) {
+		
+		if(current.getNumber()==number) {
+			return current;
+		}else {
+			return searchCell(current.getNext(), number);
+		}
+	}
+	
 	public String toString() {
 		String msg;
 		msg = toStringRow(first);

@@ -8,6 +8,8 @@ public class SnakesAndLadders {
 	private int snakes;
 	private Player firstPlayer;
 	
+	private GameGrid gameBoard;
+	
 	public Player getFirstPlayer() {
 		return firstPlayer;
 	}
@@ -130,6 +132,60 @@ public class SnakesAndLadders {
 		}else {
 			addPlayer(firstPlayer, newPlayer);
 		}
+	}
+	
+	public void createSnakes(int code, int max) {
+		
+		if(code>max) {
+			
+		}else {
+			
+			int random = getRandom();
+			
+			Cell temp = gameBoard.searchCell(random);
+			
+			if (temp.getLadder()==0 && temp.getSnake()==' ') {
+				int tmp2 = getRandomCell(random, temp.getRow());
+				
+				createSingleSnake(random, tmp2, code);
+				createSnakes(code+1, max);
+				
+			}else {
+				createSnakes(code, max);
+			}
+		}
+			
+	}
+	
+	
+	public void createSingleSnake(int start, int end, int code) {
+		
+		gameBoard.searchCell(start).setSnake((char)code);
+		
+		gameBoard.searchCell(end).setSnake((char)code);
+	}
+	
+	
+	public int getRandomCell(int cell, int row) {
+		
+		int newRandom = (int) (Math.random() * (rows*columns-1) + 2);
+		
+		Cell tmpCell = gameBoard.searchCell(newRandom);
+		
+		int newRow=tmpCell.getRow();
+		
+		if(row<newRow) {
+			if(tmpCell.getLadder()==0 && tmpCell.getSnake()==' ') {
+				return newRandom;
+			}
+		}else {
+			return getRandomCell(cell, row);
+		}
+		
+	}
+	
+	public int getRandom() {
+		return (int) (Math.random() * (rows*columns-1) + 2);
 	}
 	
 	

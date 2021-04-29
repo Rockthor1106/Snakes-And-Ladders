@@ -4,6 +4,9 @@ public class Cell{
 	
 	private int number;
 	
+	private char snake;
+	private int ladder;
+	
 	private Cell next;
 	private Cell previous;
 	private Cell up;	
@@ -11,6 +14,8 @@ public class Cell{
 	
 	public Cell(int number) {
 		this.number = number;
+		snake=' ';
+		ladder=0;
 	}
 	
 	public int getNumber() {
@@ -58,6 +63,22 @@ public class Cell{
 			msg = "[ "+number+"]";
 		}
 		return msg;
+	}
+
+	public char getSnake() {
+		return snake;
+	}
+
+	public void setSnake(char snake) {
+		this.snake = snake;
+	}
+
+	public int getLadder() {
+		return ladder;
+	}
+
+	public void setLadder(int ladder) {
+		this.ladder = ladder;
 	}
     
 }
