@@ -4,15 +4,22 @@ public class Cell{
 	
 	private int number;
 	
+
 	private char snake;
 	private int ladder;
 	
+
+	private int row;
+	private int col;
+
 	private Cell next;
 	private Cell previous;
 	private Cell up;	
 	private Cell down;
 	
-	public Cell(int number) {
+	public Cell(int row, int col, int number) {
+		this.row = row;
+		this.col = col;
 		this.number = number;
 		snake=' ';
 		ladder=0;
@@ -21,6 +28,15 @@ public class Cell{
 	public int getNumber() {
 		return number;
 	}
+	
+	public int getRow() {
+		return row;
+	}
+
+	public int getCol() {
+		return col;
+	}
+    
 	
 	public Cell getNext() {
 		return next;
@@ -64,6 +80,7 @@ public class Cell{
 		}
 		return msg;
 	}
+
 
 	public char getSnake() {
 		return snake;

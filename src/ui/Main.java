@@ -19,6 +19,7 @@ public class Main {
 		
 		GameGrid gameGrid = new GameGrid(10,10);
 		System.out.println(gameGrid);
+		System.out.println(gameGrid.searchInRows(80,gameGrid.getFirst()));
 		
 		//m.menuOptions();
 	}
