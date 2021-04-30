@@ -5,6 +5,9 @@ public class GameGrid {
 	private int numRows;
 	private int numColumns;
 	
+	private int ladders;
+	private int snakes;
+	
 	public GameGrid(int numRows, int numColumns) {
 		this.numRows = numRows;
 		this.numColumns = numColumns;
@@ -145,22 +148,6 @@ public class GameGrid {
 	}
     //-----------------------------------------------------------------------------------------
 	
-	public Cell searchCell(int number) {
-		if(number==1) {
-			return first;
-		}else {
-			return searchCell(first.getNext(), number);
-		}
-	}
-	
-	public Cell searchCell(Cell current, int number) {
-		
-		if(current.getNumber()==number) {
-			return current;
-		}else {
-			return searchCell(current.getNext(), number);
-		}
-	}
 	
 	public String toString() {
 		String msg;
@@ -199,8 +186,8 @@ public class GameGrid {
 				foundNode = searchInRows(number, first.getDown());
 			}
 		}
-		
-			
+
+
 		return foundNode;
 	}
 

@@ -73,10 +73,12 @@ public class Cell{
 	public String toString() {
 		String msg = "";
 		if (number >= 10) {
-			msg = "["+number+"]";
+			//msg = "["+number+ " " + snake +  " " + ladder + "]" ;
+			msg= "[" + ladder + " " +snake+ "]" ;
 		}
 		else {
-			msg = "[ "+number+"]";
+			//msg = "[ "+number+"]";
+			msg= "[" + ladder + " " +snake + "]" ;
 		}
 		return msg;
 	}

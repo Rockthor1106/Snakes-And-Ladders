@@ -15,11 +15,21 @@ public class Main {
 		
 		Main ppal = new Main();
 		
-		menu.displayOptions();
+		//menu.displayOptions();
 		
 		GameGrid gameGrid = new GameGrid(10,10);
 		System.out.println(gameGrid);
-		System.out.println(gameGrid.searchInRows(80,gameGrid.getFirst()));
+		
+		game.setBoard(gameGrid);
+		game.setRows(10);
+		game.setColumns(10);
+		
+		
+		
+		game.createSnakes(65, 90);
+		game.createLadders(1, 23);
+		
+		System.out.printf (gameGrid.toString());
 		
 		//m.menuOptions();
 	}

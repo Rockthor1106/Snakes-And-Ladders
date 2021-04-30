@@ -4,14 +4,17 @@ public class SnakesAndLadders {
 	
 	private int rows;
 	private int columns;
-	private int ladders;
-	private int snakes;
+	
 	private Player firstPlayer;
 	
 	private GameGrid gameBoard;
 	
 	public Player getFirstPlayer() {
 		return firstPlayer;
+	}
+	
+	public void setBoard(GameGrid game) {
+		gameBoard=game;
 	}
 	
 	public void setFirstPlayer(Player player) {
@@ -37,8 +40,8 @@ public class SnakesAndLadders {
 		
 		rows = Integer.parseInt(parts[0]);
 		columns = Integer.parseInt(parts[1]);
-		snakes = Integer.parseInt(parts[2]);
-		ladders= Integer.parseInt(parts[3]);
+		int snakes = Integer.parseInt(parts[2]);
+		int ladders= Integer.parseInt(parts[3]);
 		
 		String players = parts[4];
 		
@@ -142,10 +145,10 @@ public class SnakesAndLadders {
 			
 			int random = getRandom();
 			
-			Cell temp = gameBoard.searchCell(random);
+			Cell temp = gameBoard.searchInRows(random, gameBoard.getFirst());
 			
 			if (temp.getLadder()==0 && temp.getSnake()==' ') {
-				int tmp2 = getRandomCell(random, temp.getRow());
+				int tmp2 = getRandomCell(temp.getRow());
 				
 				createSingleSnake(random, tmp2, code);
 				createSnakes(code+1, max);
@@ -157,35 +160,98 @@ public class SnakesAndLadders {
 			
 	}
 	
+	public void createLadders(int ladder, int max) {
+		
+		if(ladder>max) {
+			
+		}else {
+			
+			int random = getRandom();
 	
-	public void createSingleSnake(int start, int end, int code) {
-		
-		gameBoard.searchCell(start).setSnake((char)code);
-		
-		gameBoard.searchCell(end).setSnake((char)code);
+			Cell temp = gameBoard.searchInRows(random, gameBoard.getFirst());
+			
+			if (temp.getLadder()==0 && temp.getSnake()==' ') {
+				int tmp2 = getRandomCell(temp.getRow());
+				
+				createSingleLadder(random, tmp2, ladder);
+				createLadders(ladder+1, max);
+				
+			}else {
+				createLadders(ladder, max);
+			}
+		}
+			
 	}
 	
 	
-	public int getRandomCell(int cell, int row) {
+	public void createSingleLadder(int start, int end, int ladder) {
 		
-		int newRandom = (int) (Math.random() * (rows*columns-1) + 2);
+		System.out.println(ladder);
 		
-		Cell tmpCell = gameBoard.searchCell(newRandom);
+		gameBoard.searchInRows(start, gameBoard.getFirst()).setLadder(ladder);
+		
+		gameBoard.searchInRows(end, gameBoard.getFirst()).setLadder(ladder);
+	}
+	
+	public void createSingleSnake(int start, int end, int code) {
+		
+		System.out.println((char)code);
+		
+		gameBoard.searchInRows(start, gameBoard.getFirst()).setSnake((char)code);
+		
+		
+		gameBoard.searchInRows(end, gameBoard.getFirst()).setSnake((char)code);
+		
+	}
+	
+	
+	public int getRandomCell(int row) {
+		
+		
+		int newRandom = getRandom();
+		
+		Cell tmpCell = gameBoard.searchInRows(newRandom, gameBoard.getFirst());
+		
 		
 		int newRow=tmpCell.getRow();
 		
-		if(row<newRow) {
+		if((row<newRow || row>newRow)) {
 			if(tmpCell.getLadder()==0 && tmpCell.getSnake()==' ') {
-				return newRandom;
+				return  newRandom;
+			}else {
+				return getRandomCell(row);
 			}
-		}else {
-			return getRandomCell(cell, row);
+		} else {
+		
+			return getRandomCell(row);
 		}
 		
 	}
 	
+	public int getRows() {
+		return rows;
+	}
+
+	public void setRows(int rows) {
+		this.rows = rows;
+	}
+
+	public int getColumns() {
+		return columns;
+	}
+
+	public void setColumns(int columns) {
+		this.columns = columns;
+	}
+
 	public int getRandom() {
-		return (int) (Math.random() * (rows*columns-1) + 2);
+		
+		
+		int max = (rows*columns)-1;
+		int random = (int) Math.floor(Math.random()*(max-2+1)+2);
+		//return (int) (Math.random() * (rows*columns-1) + 2);
+		
+		return random;
 	}
 	
 	
