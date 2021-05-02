@@ -183,7 +183,6 @@ public class SnakesAndLadders {
 			
 	}
 	
-	
 	public void createSingleLadder(int start, int end, int ladder) {
 		
 		System.out.println(ladder);
@@ -203,7 +202,6 @@ public class SnakesAndLadders {
 		gameBoard.searchInRows(end, gameBoard.getFirst()).setSnake((char)code);
 		
 	}
-	
 	
 	public int getRandomCell(int row) {
 		
@@ -246,14 +244,11 @@ public class SnakesAndLadders {
 
 	public int getRandom() {
 		
-		
 		int max = (rows*columns)-1;
 		int random = (int) Math.floor(Math.random()*(max-2+1)+2);
 		//return (int) (Math.random() * (rows*columns-1) + 2);
 		
 		return random;
 	}
-	
-	
 	
 }

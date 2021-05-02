@@ -3,7 +3,6 @@ package model;
 public class Cell{
 	
 	private int number;
-	
 
 	private char snake;
 	private int ladder;

@@ -5,12 +5,12 @@ public class GameGrid {
 	private int numRows;
 	private int numColumns;
 	
-	private int ladders;
-	private int snakes;
+//	private int ladders;
+//	private int snakes;
 	
 	public GameGrid(int numRows, int numColumns) {
 		this.numRows = numRows;
-		this.numColumns = numColumns;
+		this.numColumns = numColumns; 
 		createMatrix();
 	}
 	
@@ -87,7 +87,7 @@ public class GameGrid {
 			}
 		}
 	}
-	//	-------------------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------
 	
 	//methods to create the matrix when the rows number is odd---------------------------------
 	private void createRow2(int i, int j, Cell currentFirstRow) {
@@ -112,7 +112,6 @@ public class GameGrid {
 		}
 	}
 		
-	
 	private void createCol2(int i, int j, Cell prev, Cell rowPrev) {
 		if (j <= numColumns) {
 				
@@ -148,7 +147,7 @@ public class GameGrid {
 	}
     //-----------------------------------------------------------------------------------------
 	
-	
+	//Methods to show the game grid------------------------------------------------------------
 	public String toString() {
 		String msg;
 		msg = toStringRow(first);
@@ -172,6 +171,7 @@ public class GameGrid {
 		}
 		return msg;
 	}
+    //-----------------------------------------------------------------------------------------
 	
 	//Methods to search -----------------------------------------------------------------------
 	public Cell searchInRows(int number, Cell first) {
@@ -187,7 +187,6 @@ public class GameGrid {
 			}
 		}
 
-
 		return foundNode;
 	}
 
@@ -200,6 +199,7 @@ public class GameGrid {
 				foundNode = searchInCols(number, next.getNext());
 
 			}
+			
 		return foundNode;
 	}
     //-----------------------------------------------------------------------------------------
