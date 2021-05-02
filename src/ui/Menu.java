@@ -2,6 +2,7 @@ package ui;
 
 import java.util.Scanner;
 
+import model.Cell;
 import model.SnakesAndLadders;
 
 public class Menu {
@@ -39,8 +40,6 @@ public class Menu {
 	}
 	
 	public void displayOptions() {
-		int start;
-		String entry; 
 		System.out.println("Welcome to Snakes and Ladders. These are the options"+ 
 				"\n 1) Play \n " + 
 				"2) Show best players \n " + 
@@ -56,7 +55,41 @@ public class Menu {
 					"\n* ! O X % $ # + &"+
 					"\nEntry example: 5 4 2 3 #%*");
 			entry = sc.nextLine();
-			sal.separateEntry(entry);
+			int result = sal.separateEntry2(entry);
+			
+				switch (result) {
+				case 0:
+					System.out.println("Let the game begin!");
+					
+					System.out.println(sal.getGameBoard().toString());
+					
+					int dice = sal.throwDice();
+					
+					System.out.println(dice);
+					
+					sal.getFirstPlayer().setPosition(sal.getFirstPlayer().getPosition()+dice);
+					
+					int newPos = sal.getFirstPlayer().getPosition();
+					
+					Cell tmpCell = sal.getGameBoard().searchInRows(newPos, sal.getGameBoard().getFirst());
+					
+					tmpCell.addPlayer(sal.getFirstPlayer());
+					
+					System.out.println(sal.getGameBoard().toString());
+					
+				
+					
+					break;
+				case 1:
+					System.out.println("The number of ladders and snakes don't fit the gameboard, verify your entry");
+					displayOptions();
+					break;
+				case 2:
+					System.out.println("The number o players exceds the maximum. Max players: 9");
+					displayOptions();
+				default:
+					break;
+				}
 			break;
 		case 2:
 			

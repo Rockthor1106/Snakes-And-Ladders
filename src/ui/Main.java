@@ -19,7 +19,6 @@ public class Main {
 		
 		GameGrid gameGrid = new GameGrid(10,10);
 		System.out.println(gameGrid);
-		
 		game.setBoard(gameGrid);
 		game.setRows(10);
 		game.setColumns(10);
@@ -31,7 +30,7 @@ public class Main {
 		
 		System.out.printf (gameGrid.toString());
 		
-		//m.menuOptions();
+		
 	}
 	
 	public Main() {

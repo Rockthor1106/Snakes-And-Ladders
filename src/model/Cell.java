@@ -17,10 +17,14 @@ public class Cell{
 	private Cell up;	
 	private Cell down;
 	
+	private Player headCell;
+	private Player tailCell;
+	
 	public Cell(int row, int col, int number) {
 		this.row = row;
 		this.col = col;
 		this.number = number;
+		
 		snake=' ';
 		ladder=0;
 	}
@@ -72,13 +76,15 @@ public class Cell{
 	
 	public String toString() {
 		String msg = "";
+		
 		if (number >= 10) {
 			//msg = "["+number+ " " + snake +  " " + ladder + "]" ;
-			msg= "[" + ladder + " " +snake+ "]" ;
+			msg= "[" + ladder + " " +snake + getPlayers() + "]" ;
 		}
 		else {
 			//msg = "[ "+number+"]";
-			msg= "[" + ladder + " " +snake + "]" ;
+			//msg= "[" + ladder + " " +snake + "]" ;
+			msg= "[" + ladder + " " +snake + getPlayers() + "]" ;
 		}
 		return msg;
 	}
@@ -99,5 +105,57 @@ public class Cell{
 	public void setLadder(int ladder) {
 		this.ladder = ladder;
 	}
-    
+	
+	public void addPlayer(Player newPlayer) {
+		
+		
+		if(headCell==null) {
+			headCell=newPlayer;
+			tailCell=newPlayer;
+			newPlayer.setNextInCell(headCell);
+			newPlayer.setPosition(1);
+		}else {
+			tailCell.setNextInCell(newPlayer);
+		}
+	}
+	
+	
+	public void addPlayer(Player current, Player newPlayer) {
+		
+		if(current.getNextInCell()==null) {
+			current.setNextInCell(newPlayer);
+		}else {
+			Player nextPlayer = current.getNextInCell();
+			addPlayer(nextPlayer, newPlayer);
+		}
+	}
+	
+	public String getPlayers() {
+		String playersSymbol="";
+		
+		playersSymbol = getPlayer(playerInCell);
+		
+		return playersSymbol;
+				
+	}
+	
+	private String getPlayer(Player first) {
+		String player="";
+		if(first!=null) {
+			player+=first.getSymbol();
+			getPlayer(first.getNextInCell());
+			System.out.println(player);
+		}
+		
+		return player;
+	}
+
+	public Player getLastPlayer() {
+		return lastPlayer;
+	}
+
+	public void setLastPlayer(Player lastPlayer) {
+		this.lastPlayer = lastPlayer;
+	}
+
 }

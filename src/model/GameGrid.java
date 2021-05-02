@@ -5,8 +5,6 @@ public class GameGrid {
 	private int numRows;
 	private int numColumns;
 	
-	private int ladders;
-	private int snakes;
 	
 	public GameGrid(int numRows, int numColumns) {
 		this.numRows = numRows;

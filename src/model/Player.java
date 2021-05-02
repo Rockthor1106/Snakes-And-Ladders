@@ -1,11 +1,17 @@
 package model;
 
+
 public class Player {
 	
 	private String symbol;
 	private String nickname;
-	private String score;
+	private int score;
 	private Player nextPlayer;
+	private int moves;
+	
+	private int position;
+	
+	private Player nextInCell;
 
 	public Player(String symbol) {
 		this.symbol = symbol;
@@ -23,11 +29,11 @@ public class Player {
 		this.nickname = nickname;
 	}
 
-	public String getScore() {
+	public int getScore() {
 		return score;
 	}
 
-	public void setScore(String score) {
+	public void setScore(int score) {
 		this.score = score;
 	}
 
@@ -37,6 +43,39 @@ public class Player {
 
 	public void setNextPlayer(Player nextPlayer) {
 		this.nextPlayer = nextPlayer;
+	}
+
+	public Player getNextInCell() {
+		return nextInCell;
+	}
+
+	public void setNextInCell(Player nextInCell) {
+		this.nextInCell = nextInCell;
+	}
+
+	public int getMoves() {
+		return moves;
+	}
+
+	public void setMoves(int moves) {
+		this.moves = moves;
+	}
+	
+	public String toString() {
+		return symbol;
+		/*String playerString="";
+		playerString+=nextInCell.toString();
+		
+		return playerString;*/
+	}
+	
+
+	public int getPosition() {
+		return position;
+	}
+
+	public void setPosition(int position) {
+		this.position = position;
 	}
 	
 	
