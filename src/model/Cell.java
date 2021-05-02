@@ -3,7 +3,6 @@ package model;
 public class Cell{
 	
 	private int number;
-	
 
 	private char snake;
 	private int ladder;
@@ -133,7 +132,7 @@ public class Cell{
 	public String getPlayers() {
 		String playersSymbol="";
 		
-		playersSymbol = getPlayer(playerInCell);
+		playersSymbol = getPlayer(headCell);
 		
 		return playersSymbol;
 				
@@ -150,12 +149,12 @@ public class Cell{
 		return player;
 	}
 
-	public Player getLastPlayer() {
-		return lastPlayer;
+	public Player getTailCell() {
+		return tailCell;
 	}
 
 	public void setLastPlayer(Player lastPlayer) {
-		this.lastPlayer = lastPlayer;
+		this.tailCell = lastPlayer;
 	}
 
 }

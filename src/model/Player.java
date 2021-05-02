@@ -4,8 +4,7 @@ package model;
 public class Player {
 	
 	private String symbol;
-	private String nickname;
-	private int score;
+	
 	private Player nextPlayer;
 	private int moves;
 	
@@ -21,21 +20,7 @@ public class Player {
 		return symbol;
 	}
 
-	public String getNickname() {
-		return nickname;
-	}
 
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-
-	public int getScore() {
-		return score;
-	}
-
-	public void setScore(int score) {
-		this.score = score;
-	}
 
 	public Player getNextPlayer() {
 		return nextPlayer;
@@ -44,6 +29,7 @@ public class Player {
 	public void setNextPlayer(Player nextPlayer) {
 		this.nextPlayer = nextPlayer;
 	}
+
 
 	public Player getNextInCell() {
 		return nextInCell;
@@ -77,6 +63,5 @@ public class Player {
 	public void setPosition(int position) {
 		this.position = position;
 	}
-	
 	
 }

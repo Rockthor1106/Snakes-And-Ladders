@@ -251,29 +251,28 @@ public class SnakesAndLadders {
 		
 	}
 	
-	
-		public int getRandomCell(int row) {
-			
-			
-			int newRandom = getRandom();
-			
-			Cell tmpCell = gameBoard.searchInRows(newRandom, gameBoard.getFirst());
-			
-			
-			int newRow=tmpCell.getRow();
-			
-			if((row<newRow || row>newRow)) {
-				if(tmpCell.getLadder()==0 && tmpCell.getSnake()==' ') {
-					return  newRandom;
-				}else {
-					return getRandomCell(row);
-				}
-			} else {
-			
+
+	public int getRandomCell(int row) {
+		
+		
+		int newRandom = getRandom();
+		
+		Cell tmpCell = gameBoard.searchInRows(newRandom, gameBoard.getFirst());
+		
+		
+		int newRow=tmpCell.getRow();
+		
+		if((row<newRow || row>newRow)) {
+			if(tmpCell.getLadder()==0 && tmpCell.getSnake()==' ') {
+				return  newRandom;
+			}else {
 				return getRandomCell(row);
 			}
 			
+		}else {
+			return getRandomCell(row) ;
 		}
+	}
 	
 	public int getRows() {
 		return rows;
@@ -292,7 +291,6 @@ public class SnakesAndLadders {
 	}
 
 	public int getRandom() {
-		
 		
 		int max = (rows*columns)-1;
 		int random = (int) Math.floor(Math.random()*(max-2+1)+2);
