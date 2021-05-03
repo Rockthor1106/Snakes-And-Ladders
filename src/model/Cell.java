@@ -17,7 +17,6 @@ public class Cell{
 	private Cell down;
 	
 	private Player headCell;
-	private Player tailCell;
 	
 	public Cell(int row, int col, int number) {
 		this.row = row;
@@ -73,17 +72,109 @@ public class Cell{
 		this.down = down;
 	}
 	
+	
+	public void addPlayer(Player newPlayer) {
+		
+		if(headCell==null) {
+			headCell=newPlayer;
+			headCell.setNextInCell(newPlayer);
+			newPlayer.setPosition(number);
+		}else {
+			addPlayer(headCell, newPlayer);
+		}
+		
+	}
+	
+	private void addPlayer(Player current, Player newPlayer) {
+		
+		if(current.getNextInCell().equals(headCell)) {
+			current.setNextInCell(newPlayer);
+			newPlayer.setNextInCell(headCell);
+			newPlayer.setPosition(number);
+		}else {
+			addPlayer(current.getNextInCell(), newPlayer);
+		}
+		
+	}
+	
+	public Player searchPlayer(Player player) {
+		
+		if(headCell.equals(player)) {
+			return headCell;
+		}else if(headCell.getNextInCell()!= headCell){
+			return searchPlayer(headCell, player);
+		}else {
+			return null;
+		}
+	}
+	
+	private Player searchPlayer(Player current, Player search) {
+		if(current.equals(search)) {
+			return current;
+		}else if(current.getNextInCell()!=headCell) {
+			return searchPlayer(current.getNextInCell(), search);
+		}else {
+			return null;
+		}
+	}
+	
+	public Player getLastPlayer(Player first) {
+		if(first.getNextInCell().equals(headCell)) {
+			return first;
+		}else {
+			return getLastPlayer(first.getNextInCell());
+		}
+	}
+	
+	public Player getPrev(Player first) {
+		if(headCell.getNextInCell().equals(first)) {
+			return headCell;
+		}else {
+			 return getPrev(headCell.getNextInCell(), first);
+		}
+	}
+	
+	public Player getPrev(Player current, Player pos) {
+		if(current.getNextInCell().equals(pos)) {
+			return current;
+		}else {
+			return getPrev(current.getNextInCell(), pos);
+		}
+	}
+	
+	public Player removePlayer(Player quit) {
+		if(headCell==null) {
+			return null;
+		}else if(headCell.equals(quit) && headCell.getNextInCell().equals(headCell)) {
+			headCell = null;
+			return headCell;
+		}else if(headCell.equals(quit)){
+			Player temp = getLastPlayer(headCell);
+			temp.setNextInCell(headCell.getNextInCell());
+			headCell=headCell.getNextInCell();
+			return headCell;
+		}else if(getLastPlayer(headCell).equals(quit)) {
+			Player tmp2 = getPrev(getLastPlayer(headCell));
+			tmp2.setNextInCell(headCell);
+			return getLastPlayer(headCell);
+		}else {
+			Player tmp2 = getPrev(quit);
+			tmp2.setNextInCell(quit.getNextInCell());
+			return quit;
+		}
+	}
+	
 	public String toString() {
 		String msg = "";
 		
 		if (number >= 10) {
 			//msg = "["+number+ " " + snake +  " " + ladder + "]" ;
-			msg= "[" + ladder + " " +snake + getPlayers() + "]" ;
+			msg= "[" + ladder + " " +snake + getPlayers(headCell) + "]" ;
 		}
 		else {
 			//msg = "[ "+number+"]";
 			//msg= "[" + ladder + " " +snake + "]" ;
-			msg= "[" + ladder + " " +snake + getPlayers() + "]" ;
+			msg= "[" + ladder + " " +snake + getPlayers(headCell) + "]" ;
 		}
 		return msg;
 	}
@@ -105,56 +196,30 @@ public class Cell{
 		this.ladder = ladder;
 	}
 	
-	public void addPlayer(Player newPlayer) {
-		
-		
-		if(headCell==null) {
-			headCell=newPlayer;
-			tailCell=newPlayer;
-			newPlayer.setNextInCell(headCell);
-			newPlayer.setPosition(1);
-		}else {
-			tailCell.setNextInCell(newPlayer);
-		}
-	}
 	
 	
-	public void addPlayer(Player current, Player newPlayer) {
-		
-		if(current.getNextInCell()==null) {
-			current.setNextInCell(newPlayer);
-		}else {
-			Player nextPlayer = current.getNextInCell();
-			addPlayer(nextPlayer, newPlayer);
-		}
-	}
-	
-	public String getPlayers() {
+	/*public String getPlayers() {
 		String playersSymbol="";
 		
 		playersSymbol = getPlayer(headCell);
 		
 		return playersSymbol;
 				
-	}
+	}*/
 	
-	private String getPlayer(Player first) {
-		String player="";
-		if(first!=null) {
-			player+=first.getSymbol();
-			getPlayer(first.getNextInCell());
-			System.out.println(player);
+	public String getPlayers(Player first) {
+		String tos = "";
+		/*if(first==null) {
+			return "";
+		}else {
+			tos= first.toString();
+			tos+= getPlayers(first.getNextInCell());
 		}
-		
-		return player;
+		return tos;*/
+		tos= first.toString();
+		return tos;
 	}
 
-	public Player getTailCell() {
-		return tailCell;
-	}
 
-	public void setLastPlayer(Player lastPlayer) {
-		this.tailCell = lastPlayer;
-	}
 
 }

@@ -15,20 +15,20 @@ public class Main {
 		
 		Main ppal = new Main();
 		
-		//menu.displayOptions();
+		menu.displayOptions();
 		
-		GameGrid gameGrid = new GameGrid(10,10);
-		System.out.println(gameGrid);
-		game.setBoard(gameGrid);
-		game.setRows(10);
-		game.setColumns(10);
+		//GameGrid gameGrid = new GameGrid(5,5);
+		//System.out.println(gameGrid);
+		//game.setBoard(gameGrid);
+		//game.setRows(5);
+		//game.setColumns(5);
 		
 		
 		
-		game.createSnakes(65, 90);
-		game.createLadders(1, 23);
+		//game.createSnakes(65, 68);
+		//game.createLadders(1, 4);
 		
-		System.out.printf (gameGrid.toString());
+		//System.out.printf (gameGrid.toString());
 		
 		
 	}

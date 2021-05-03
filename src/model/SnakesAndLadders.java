@@ -181,8 +181,10 @@ public class SnakesAndLadders {
 		
 		if(start!=null ) {
 			temp.addPlayer(start);
-			
+			System.out.println("pasó: " + temp.toString());
 			setPlayersStart(start.getNextPlayer());
+			
+		}else {
 			
 		}
 		
