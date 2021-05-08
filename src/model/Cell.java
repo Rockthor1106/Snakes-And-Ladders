@@ -87,7 +87,7 @@ public class Cell{
 			else {
 				msg= "["+ ladder + " " + snake + " " + firstPlayer.getSymbol() +"]";
 			}
-//			msg = "["+number+"]";
+			//msg = "["+number+"]";
 			//msg = "["+number+ " " + snake +  " " + ladder + "]" ;
 			
 		}
@@ -98,7 +98,7 @@ public class Cell{
 			else {
 				msg= "["+ ladder + " " + snake + " " + firstPlayer.getSymbol() +"]";
 			}
-//			msg = "[ "+number+"]";
+			//msg = "[ "+number+"]";
 			//msg= "[" + ladder + " " +snake + "]" ;
 			
 		}

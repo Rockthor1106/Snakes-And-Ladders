@@ -122,6 +122,7 @@ public class GameGrid {
 				downFirstRow.setUp(currentFirstRow);
 				currentFirstRow.setDown(downFirstRow);
 				createRow2(i + 1, j, downFirstRow);
+
 			}
 		}
 	}
@@ -219,17 +220,20 @@ public class GameGrid {
     //----------------------------------------------------------------------------------------
 	
 	//Methods to search a snake---------------------------------------------------------------
-	public Cell searchInRows(int i, int row, char snake, Cell first) {
+	/**the parameter Cell first is not the first cell of the game grid, 
+	instead of this it is the first cell depending on row number - 1.
+	I mean, bottom row**/
+	public Cell searchInRows(char snake, Cell first) {
 		Cell foundCell = null;
 		foundCell = searchInCols(snake, first.getNext());
 		if(foundCell == null){
-			if (i < row) {
+			if (first != null) {
 				if (first.getSnake() == snake) {
 					foundCell = first;
 
 				} 
 				else if (first.getDown() != null) {
-					foundCell = searchInRows(i + 1, row, snake, first.getDown());
+					foundCell = searchInRows(snake, first.getDown());
 				}
 			}
 		}
@@ -249,7 +253,8 @@ public class GameGrid {
 				
 		return foundCell;
 	}
-	//--------------------------------------------------------------------------------------
+	
+ 	//--------------------------------------------------------------------------------------
 		
 	//Methods to search a ladder------------------------------------------------------------
 	public Cell searchInRows(int i, int row, Cell first, int ladder) {
@@ -284,7 +289,24 @@ public class GameGrid {
 	}
 	//-----------------------------------------------------------------------------------------
 	
-	//Method to move the players---------------------------------------
+	//Method to search the first cell depending on number of row-------------------------------
+	public Cell searchFirst(int row, Cell first) {
+		Cell foundCell = null;
+		if(foundCell == null){
+			if (first.getRow() == row) {
+				foundCell = first;
+
+			} 
+			else if (first.getDown() != null) {
+				foundCell = searchFirst(row, first.getDown());
+			}
+		} 
+
+		return foundCell;
+	}
+	//--------------------------------------------------------------------------------------------
+	
+	//Method to move the players------------------------------------------------------------------
 	public void movePlayer(Player player) {
 		Cell lastCell = searchInRows(numRows*numColumns, first);
 		if (lastCell.getFirstPlayer() != null) {//base case
@@ -298,7 +320,7 @@ public class GameGrid {
 		finalCell.addPlayer(player);
 		initialCell.deletePlayer();
 		if (finalCell.getSnake() != ' ') {
-			finalCell = searchInRows(1, finalCell.getRow(), finalCell.getSnake(), getFirst());
+			finalCell = searchInRows(finalCell.getSnake(), finalCell);
 			finalCell.addPlayer(player);
 		}
 		if (finalCell.getLadder() != 0) {
@@ -317,6 +339,6 @@ public class GameGrid {
 //	public void movePlayer3() {
 //		
 //	}
-	//-----------------------------------------------------------------
+	//---------------------------------------------------------------------------------------------
 
 }
