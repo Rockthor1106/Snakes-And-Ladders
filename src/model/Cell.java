@@ -3,11 +3,9 @@ package model;
 public class Cell{
 	
 	private int number;
-
 	private char snake;
 	private int ladder;
 	
-
 	private int row;
 	private int col;
 
@@ -16,15 +14,15 @@ public class Cell{
 	private Cell up;	
 	private Cell down;
 	
-	private Player headCell;
+	private Player firstPlayer;
 	
 	public Cell(int row, int col, int number) {
 		this.row = row;
 		this.col = col;
-		this.number = number;
+		this.number = number;	
+		snake = ' ';
+		ladder = 0;
 		
-		snake=' ';
-		ladder=0;
 	}
 	
 	public int getNumber() {
@@ -39,7 +37,6 @@ public class Cell{
 		return col;
 	}
     
-	
 	public Cell getNext() {
 		return next;
 	}
@@ -72,114 +69,42 @@ public class Cell{
 		this.down = down;
 	}
 	
-	
-	public void addPlayer(Player newPlayer) {
-		
-		if(headCell==null) {
-			headCell=newPlayer;
-			headCell.setNextInCell(newPlayer);
-			newPlayer.setPosition(number);
-		}else {
-			addPlayer(headCell, newPlayer);
-		}
-		
+	public Player getFirstPlayer() {
+		return firstPlayer;
 	}
-	
-	private void addPlayer(Player current, Player newPlayer) {
-		
-		if(current.getNextInCell().equals(headCell)) {
-			current.setNextInCell(newPlayer);
-			newPlayer.setNextInCell(headCell);
-			newPlayer.setPosition(number);
-		}else {
-			addPlayer(current.getNextInCell(), newPlayer);
-		}
-		
+
+	public void setFirstPlayer(Player firstPlayer) {
+		this.firstPlayer = firstPlayer;
 	}
-	
-	public Player searchPlayer(Player player) {
-		
-		if(headCell.equals(player)) {
-			return headCell;
-		}else if(headCell.getNextInCell()!= headCell){
-			return searchPlayer(headCell, player);
-		}else {
-			return null;
-		}
-	}
-	
-	private Player searchPlayer(Player current, Player search) {
-		if(current.equals(search)) {
-			return current;
-		}else if(current.getNextInCell()!=headCell) {
-			return searchPlayer(current.getNextInCell(), search);
-		}else {
-			return null;
-		}
-	}
-	
-	public Player getLastPlayer(Player first) {
-		if(first.getNextInCell().equals(headCell)) {
-			return first;
-		}else {
-			return getLastPlayer(first.getNextInCell());
-		}
-	}
-	
-	public Player getPrev(Player first) {
-		if(headCell.getNextInCell().equals(first)) {
-			return headCell;
-		}else {
-			 return getPrev(headCell.getNextInCell(), first);
-		}
-	}
-	
-	public Player getPrev(Player current, Player pos) {
-		if(current.getNextInCell().equals(pos)) {
-			return current;
-		}else {
-			return getPrev(current.getNextInCell(), pos);
-		}
-	}
-	
-	public Player removePlayer(Player quit) {
-		if(headCell==null) {
-			return null;
-		}else if(headCell.equals(quit) && headCell.getNextInCell().equals(headCell)) {
-			headCell = null;
-			return headCell;
-		}else if(headCell.equals(quit)){
-			Player temp = getLastPlayer(headCell);
-			temp.setNextInCell(headCell.getNextInCell());
-			headCell=headCell.getNextInCell();
-			return headCell;
-		}else if(getLastPlayer(headCell).equals(quit)) {
-			Player tmp2 = getPrev(getLastPlayer(headCell));
-			tmp2.setNextInCell(headCell);
-			return getLastPlayer(headCell);
-		}else {
-			Player tmp2 = getPrev(quit);
-			tmp2.setNextInCell(quit.getNextInCell());
-			return quit;
-		}
-	}
-	
+
 	public String toString() {
 		String msg = "";
 		
 		if (number >= 10) {
+			if (firstPlayer == null) {
+				msg= "["+ ladder + " " + snake +"]";
+			}
+			else {
+				msg= "["+ ladder + " " + snake + " " + firstPlayer.getSymbol() +"]";
+			}
+//			msg = "["+number+"]";
 			//msg = "["+number+ " " + snake +  " " + ladder + "]" ;
-			msg= "[" + ladder + " " +snake + getPlayers(headCell) + "]" ;
+			
 		}
 		else {
-			//msg = "[ "+number+"]";
+			if (firstPlayer == null) {
+				msg= "["+ ladder + " " + snake +"]";
+			}
+			else {
+				msg= "["+ ladder + " " + snake + " " + firstPlayer.getSymbol() +"]";
+			}
+//			msg = "[ "+number+"]";
 			//msg= "[" + ladder + " " +snake + "]" ;
-			msg= "[" + ladder + " " +snake + getPlayers(headCell) + "]" ;
+			
 		}
 		return msg;
 	}
-
-
+	
 	public char getSnake() {
 		return snake;
 	}
@@ -196,30 +121,48 @@ public class Cell{
 		this.ladder = ladder;
 	}
 	
-	
-	
-	/*public String getPlayers() {
-		String playersSymbol="";
-		
-		playersSymbol = getPlayer(headCell);
-		
-		return playersSymbol;
-				
-	}*/
-	
-	public String getPlayers(Player first) {
-		String tos = "";
-		/*if(first==null) {
-			return "";
-		}else {
-			tos= first.toString();
-			tos+= getPlayers(first.getNextInCell());
+	//Method to add players---------------------------------------------------
+	public void addPlayer(Player newPlayer) {
+		if (firstPlayer == null) {
+			firstPlayer = newPlayer;
+			firstPlayer.setNextPlayer(newPlayer);
+			firstPlayer.setPreviousPlayer(newPlayer);
+			firstPlayer.setPosition(1);
 		}
-		return tos;*/
-		tos= first.toString();
-		return tos;
+		else {
+			Player lastPlayer = firstPlayer.getPreviousPlayer();
+			newPlayer.setNextPlayer(firstPlayer);
+			newPlayer.setPreviousPlayer(lastPlayer);
+			firstPlayer.setPreviousPlayer(newPlayer);
+			lastPlayer.setNextPlayer(newPlayer);
+			lastPlayer.setPosition(1);
+		}
 	}
-
-
+	//-------------------------------------------------------------------------
+	
+	//Method to delete the first player----------------------------------------
+	public void deletePlayer() {
+		Player lastPlayer = firstPlayer.getPreviousPlayer();
+		if (firstPlayer == lastPlayer) {
+			firstPlayer = null;
+			lastPlayer = null;
+		}
+		else {
+			Player newFirst = firstPlayer.getNextPlayer();
+			firstPlayer = newFirst;
+			newFirst.setPreviousPlayer(lastPlayer);
+			lastPlayer.setNextPlayer(firstPlayer);
+		}
+	}
+	//-------------------------------------------------------------------------
+	
+	public boolean empty() {
+		if (firstPlayer == null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 
 }

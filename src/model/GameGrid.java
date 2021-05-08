@@ -16,6 +16,22 @@ public class GameGrid {
 		return first;
 	}
 	
+	public int getNumRows() {
+		return numRows;
+	}
+
+	public void setNumRows(int numRows) {
+		this.numRows = numRows;
+	} 
+
+	public int getNumColumns() {
+		return numColumns;
+	}
+
+	public void setNumColumns(int numColumns) {
+		this.numColumns = numColumns;
+	}
+
 	private void createMatrix() {
 		if (numRows % 2 == 0) {
 			
@@ -171,34 +187,136 @@ public class GameGrid {
 	}
     //-----------------------------------------------------------------------------------------
 	
-	//Methods to search -----------------------------------------------------------------------
+	//Methods to search a cell by number-------------------------------------------------------
 	public Cell searchInRows(int number, Cell first) {
-		Cell foundNode = null;
-		foundNode = searchInCols(number, first.getNext());
-		if(foundNode == null){
-			if (first.getNumber() == number ) {
-				foundNode = first;
+		Cell foundCell = null;
+		foundCell = searchInCols(number, first.getNext());
+		if(foundCell == null){
+			if (first.getNumber() == number) {
+				foundCell = first;
 
 			} 
 			else if (first.getDown() != null) {
-				foundNode = searchInRows(number, first.getDown());
+				foundCell = searchInRows(number, first.getDown());
 			}
 		}
 
-		return foundNode;
+		return foundCell;
 	}
 
 	private Cell searchInCols(int number, Cell next) {
 		Cell foundNode = null;
-			if (next.getNumber() == number) {
-				foundNode = next;
-			}
-			else if (next.getNext() != null) {
-				foundNode = searchInCols(number, next.getNext());
+		if (next.getNumber() == number) {
+			foundNode = next;
+		}
+		else if (next.getNext() != null) {
+			foundNode = searchInCols(number, next.getNext());
 
-			}
+		}
 			
 		return foundNode;
 	}
-    //-----------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------
+	
+	//Methods to search a snake---------------------------------------------------------------
+	public Cell searchInRows(int i, int row, char snake, Cell first) {
+		Cell foundCell = null;
+		foundCell = searchInCols(snake, first.getNext());
+		if(foundCell == null){
+			if (i < row) {
+				if (first.getSnake() == snake) {
+					foundCell = first;
+
+				} 
+				else if (first.getDown() != null) {
+					foundCell = searchInRows(i + 1, row, snake, first.getDown());
+				}
+			}
+		}
+
+		return foundCell;
+	}
+
+	private Cell searchInCols(char snake, Cell next) {
+		Cell foundCell = null;
+			if (next.getSnake() == snake) {
+				foundCell = next;
+			}
+			else if (next.getNext() != null) {
+				foundCell = searchInCols(snake, next.getNext());
+
+			}
+				
+		return foundCell;
+	}
+	//--------------------------------------------------------------------------------------
+		
+	//Methods to search a ladder------------------------------------------------------------
+	public Cell searchInRows(int i, int row, Cell first, int ladder) {
+		Cell foundCell = null;
+		foundCell = searchInCols(first.getNext(), ladder);
+		if(foundCell == null){
+			if (i < row) {
+				if (first.getLadder() == ladder) {
+					foundCell = first;
+
+				} 
+				else if (first.getDown() != null) {
+					foundCell = searchInRows(i + 1, row,first.getDown(),ladder);
+				}
+			}
+		}
+
+		return foundCell;
+	}
+
+	private Cell searchInCols(Cell next, int ladder) {
+		Cell foundCell = null;
+			if (next.getLadder() == ladder) {
+				foundCell = next;
+			}
+			else if (next.getNext() != null) {
+				foundCell = searchInCols(next.getNext(), ladder);
+
+			}
+				
+		return foundCell;
+	}
+	//-----------------------------------------------------------------------------------------
+	
+	//Method to move the players---------------------------------------
+	public void movePlayer(Player player) {
+		Cell lastCell = searchInRows(numRows*numColumns, first);
+		if (lastCell.getFirstPlayer() != null) {//base case
+			return;
+		}
+		int initialPos = player.getPosition();
+		Cell initialCell = searchInRows(initialPos, first);
+		SnakesAndLadders snl = new SnakesAndLadders();
+		int finalPos = snl.throwDice() + initialPos;
+		Cell finalCell = searchInRows(finalPos, first);
+		finalCell.addPlayer(player);
+		initialCell.deletePlayer();
+		if (finalCell.getSnake() != ' ') {
+			finalCell = searchInRows(1, finalCell.getRow(), finalCell.getSnake(), getFirst());
+			finalCell.addPlayer(player);
+		}
+		if (finalCell.getLadder() != 0) {
+			finalCell = searchInRows(1, finalCell.getRow(), getFirst(), finalCell.getLadder());
+			finalCell.addPlayer(player);
+		}
+	}
+	
+//	public void movePlayer2(Player player) {
+//		if (finalCell.getSnake() != ' ') {
+//			finalCell = searchInRows(1, finalCell.getRow(), finalCell.getSnake(), getFirst());
+//			finalCell.addPlayer(player);		
+//		}
+//	}
+//	
+//	public void movePlayer3() {
+//		
+//	}
+	//-----------------------------------------------------------------
+
 }

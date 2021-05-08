@@ -1,12 +1,19 @@
 package model;
 
 public class BinarySearchTree {
-	Winner root;
+	private Winner root;
 	
 	public BinarySearchTree() {
 		
 	}
 	
+	public Winner getRoot() {
+		return root;
+	}
+
+	public void setRoot(Winner root) {
+		this.root = root;
+	}
 	//Methods to add players that won the game-------------------------------------------
 	public void addWinner(String symbol, String nickname, int score, String game) {
 		Winner newWinner = new Winner(symbol, nickname, score, game);
@@ -49,7 +56,7 @@ public class BinarySearchTree {
 				inOrden(winner.left);
 			}
 			
-			System.out.println(winner.toString());
+			System.out.println(winner);
 			
 			if (winner.right != null) {
 				inOrden(winner.right);
@@ -58,3 +65,4 @@ public class BinarySearchTree {
 	}
 	//---------------------------------------------------------------------------------
 }
+

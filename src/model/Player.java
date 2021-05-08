@@ -4,39 +4,23 @@ package model;
 public class Player {
 	
 	private String symbol;
-	
-	private Player nextPlayer;
+	private int position;
 	private int moves;
 	
-	private int position;
+	private Player nextPlayer;
+	private Player previousPlayer;
 	
-	private Player nextInCell;
 
 	public Player(String symbol) {
 		this.symbol = symbol;
 	}
+	
+	public Player() {
+		
+	}
 
 	public String getSymbol() {
 		return symbol;
-	}
-
-
-
-	public Player getNextPlayer() {
-		return nextPlayer;
-	}
-
-	public void setNextPlayer(Player nextPlayer) {
-		this.nextPlayer = nextPlayer;
-	}
-
-
-	public Player getNextInCell() {
-		return nextInCell;
-	}
-
-	public void setNextInCell(Player nextInCell) {
-		this.nextInCell = nextInCell;
 	}
 
 	public int getMoves() {
@@ -46,15 +30,6 @@ public class Player {
 	public void setMoves(int moves) {
 		this.moves = moves;
 	}
-	
-	public String toString() {
-		return symbol;
-		/*String playerString="";
-		playerString+=nextInCell.toString();
-		
-		return playerString;*/
-	}
-	
 
 	public int getPosition() {
 		return position;
@@ -62,6 +37,22 @@ public class Player {
 
 	public void setPosition(int position) {
 		this.position = position;
+	}
+
+	public Player getNextPlayer() {
+		return nextPlayer;
+	}
+
+	public void setNextPlayer(Player nextPlayer) {
+		this.nextPlayer = nextPlayer;
+	}
+
+	public Player getPreviousPlayer() {
+		return previousPlayer;
+	}
+
+	public void setPreviousPlayer(Player previousPlayer) {
+		this.previousPlayer = previousPlayer;
 	}
 	
 }

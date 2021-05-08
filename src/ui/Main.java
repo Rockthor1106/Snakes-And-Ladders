@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import model.SnakesAndLadders;
 import model.GameGrid;
+import model.Player;
 
 public class Main {
 	
@@ -15,22 +16,19 @@ public class Main {
 		
 		Main ppal = new Main();
 		
-		menu.displayOptions();
+//		menu.displayOptions();
 		
-		//GameGrid gameGrid = new GameGrid(5,5);
-		//System.out.println(gameGrid);
-		//game.setBoard(gameGrid);
-		//game.setRows(5);
-		//game.setColumns(5);
+		GameGrid gameGrid = new GameGrid(10,10);
+		Player newPlayer = new Player("#");
+		gameGrid.searchInRows(1, gameGrid.getFirst()).addPlayer(newPlayer);
 		
-		
-		
-		//game.createSnakes(65, 68);
-		//game.createLadders(1, 4);
-		
-		//System.out.printf (gameGrid.toString());
-		
-		
+		game.setBoard(gameGrid);
+		game.setRows(10);
+		game.setColumns(10);
+		game.createSnakes(65, 70);
+		game.createLadders(1, 3);
+		gameGrid.movePlayer(newPlayer);
+		System.out.println(gameGrid);
 	}
 	
 	public Main() {
@@ -40,3 +38,4 @@ public class Main {
 	}
 
 }
+

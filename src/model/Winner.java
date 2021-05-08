@@ -45,9 +45,11 @@ public class Winner extends Player {
 	public String toString() {
 		String msg = "";
 		msg = nickname + "\n";
+		msg += getSymbol() + "\n";
 		msg += score + "\n";
 		msg += game;
 		return msg;
 	}
 	
 }
+
