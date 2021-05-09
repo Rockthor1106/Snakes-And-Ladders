@@ -55,4 +55,9 @@ public class Player {
 		this.previousPlayer = previousPlayer;
 	}
 	
+//	public String toString() {
+//		String msg = "";
+//		msg = nextPlayer.getSymbol() ;
+//		return msg;
+//	}
 }

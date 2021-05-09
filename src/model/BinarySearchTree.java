@@ -15,9 +15,8 @@ public class BinarySearchTree {
 		this.root = root;
 	}
 	//Methods to add players that won the game-------------------------------------------
-	public void addWinner(String symbol, String nickname, int score, String game) {
-		Winner newWinner = new Winner(symbol, nickname, score, game);
-		
+	public void addWinner(Winner newWinner) {
+//		Winner newWinner = new Winner(symbol, nickname, score, game);	
 		if (root == null) {
 			root = newWinner;
 		}
@@ -56,7 +55,7 @@ public class BinarySearchTree {
 				inOrden(winner.left);
 			}
 			
-			System.out.println(winner);
+			System.out.println(winner + "\n");
 			
 			if (winner.right != null) {
 				inOrden(winner.right);

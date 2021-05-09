@@ -307,38 +307,47 @@ public class GameGrid {
 	//--------------------------------------------------------------------------------------------
 	
 	//Method to move the players------------------------------------------------------------------
-	public void movePlayer(Player player) {
+	public boolean movePlayer(Player player) {
+		
 		Cell lastCell = searchInRows(numRows*numColumns, first);
 		if (lastCell.getFirstPlayer() != null) {//base case
-			return;
+			return true; 
 		}
 		int initialPos = player.getPosition();
 		Cell initialCell = searchInRows(initialPos, first);
 		SnakesAndLadders snl = new SnakesAndLadders();
 		int finalPos = snl.throwDice() + initialPos;
 		Cell finalCell = searchInRows(finalPos, first);
-		finalCell.addPlayer(player);
+		System.out.println("no hay nada");
+		System.out.println(initialPos + "-" + finalPos);
+	    finalCell.addPlayer(player);
+		finalCell.getFirstPlayer().setPosition(finalPos);
 		initialCell.deletePlayer();
+			
 		if (finalCell.getSnake() != ' ') {
-			finalCell = searchInRows(finalCell.getSnake(), finalCell);
-			finalCell.addPlayer(player);
+			initialCell = finalCell;
+			System.out.println("existe snake");
+			Cell firstCell = searchFirst(initialCell.getRow(), getFirst());
+			if (firstCell.getDown() != null) {
+				finalCell = searchInRows(finalCell.getSnake(), firstCell.getDown());
+				finalCell.addPlayer(player);
+				finalCell.getFirstPlayer().setPosition(finalCell.getNumber());
+				initialCell.deletePlayer();
+				
+			}
+
 		}
 		if (finalCell.getLadder() != 0) {
+			initialCell = finalCell;
+			System.out.println("existe ladder");
 			finalCell = searchInRows(1, finalCell.getRow(), getFirst(), finalCell.getLadder());
 			finalCell.addPlayer(player);
+			finalCell.getFirstPlayer().setPosition(finalCell.getNumber());
+			initialCell.deletePlayer();
 		}
+		return false;
 	}
 	
-//	public void movePlayer2(Player player) {
-//		if (finalCell.getSnake() != ' ') {
-//			finalCell = searchInRows(1, finalCell.getRow(), finalCell.getSnake(), getFirst());
-//			finalCell.addPlayer(player);		
-//		}
-//	}
-//	
-//	public void movePlayer3() {
-//		
-//	}
 	//---------------------------------------------------------------------------------------------
 
 }

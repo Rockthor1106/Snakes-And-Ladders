@@ -25,6 +25,8 @@ public class Cell{
 		
 	}
 	
+	public Cell() {}
+	
 	public int getNumber() {
 		return number;
 	}
@@ -85,7 +87,7 @@ public class Cell{
 				msg= "["+ ladder + " " + snake +"]";
 			}
 			else {
-				msg= "["+ ladder + " " + snake + " " + firstPlayer.getSymbol() +"]";
+				msg= "["+ ladder + " " + snake + " " + showPlayers() + "]";
 			}
 			//msg = "["+number+"]";
 			//msg = "["+number+ " " + snake +  " " + ladder + "]" ;
@@ -93,10 +95,10 @@ public class Cell{
 		}
 		else {
 			if (firstPlayer == null) {
-				msg= "["+ ladder + " " + snake +"]";
+				msg=  "["+ ladder + " " + snake +"]";
 			}
 			else {
-				msg= "["+ ladder + " " + snake + " " + firstPlayer.getSymbol() +"]";
+				msg= "["+ ladder + " " + snake + " " + showPlayers() + "]";
 			}
 			//msg = "[ "+number+"]";
 			//msg= "[" + ladder + " " +snake + "]" ;
@@ -156,6 +158,7 @@ public class Cell{
 	}
 	//-------------------------------------------------------------------------
 	
+	//Methods to show the list of players within a cell------------------------
 	public boolean empty() {
 		if (firstPlayer == null) {
 			return true;
@@ -164,5 +167,25 @@ public class Cell{
 			return false;
 		}
 	}
+	
+	public String showPlayers() {
+		String msg = "";
+		if (!empty()) {
+			msg = firstPlayer.getSymbol();
+			msg += x(firstPlayer.getNextPlayer());
+		}
+		return msg;
+	}
+	
+	public String x (Player aux) {
+		String msg = "";
+		if (aux != firstPlayer) {
+			msg = aux.getSymbol();
+			aux = aux.getNextPlayer();
+			msg += x(aux);
+		}
+		return msg;
+	}
+	//-------------------------------------------------------------------------
 
 }

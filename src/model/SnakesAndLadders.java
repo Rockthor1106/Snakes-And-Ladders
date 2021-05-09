@@ -37,7 +37,7 @@ public class SnakesAndLadders {
 //			createPlayers(players, 0);
 			createBoard();
 		}else if(players.length()==1) {
-			int numPlayers=players.length();
+//			int numPlayers=players.length();
 //			createPlayersRandom(numPlayers);
 			createBoard();
 		}
@@ -250,4 +250,3 @@ public class SnakesAndLadders {
 	}
 
 }
-

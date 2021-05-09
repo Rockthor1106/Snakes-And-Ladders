@@ -38,6 +38,7 @@ public class Menu {
 				case 0:
 					System.out.println("Let the game begin!");
 					
+					
 					break;
 				case 1:
 					System.out.println("The number of ladders and snakes don't fit the gameboard, verify your entry");
@@ -66,13 +67,6 @@ public class Menu {
 				
 	}
 	
-//	public void registerWinner() {
-//		String nickname;
-//		System.out.println("Register Winner");
-//		System.out.println("Type a nickname");
-//		nickname = sc.nextLine();
-//		BinarySearchTree binarySearchTree = new BinarySearchTree();
-//		GameGrid gameGrid = new GameGrid();
-//		binarySearchTree.addWinner(gameGrid.searchInRows(gameGrid.getNumRows()*gameGrid.getNumColumns(), gameGrid.getFirst()).getFirstPlayer().getSymbol(), nickname, 120, entry);
-//	}
+	public void registerWinner() {
+	}
 }
