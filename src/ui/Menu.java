@@ -2,14 +2,16 @@ package ui;
 
 import java.util.Scanner;
 
+
 import model.BinarySearchTree;
+import model.Player;
 import model.SnakesAndLadders;
 
 public class Menu {
 	
 	private String entry;
 	private int start;
-	private Scanner sc = new Scanner(System.in);
+	private final Scanner sc = new Scanner(System.in);
 	private SnakesAndLadders sal;
 	
 	public Menu(SnakesAndLadders snakesAndLadders) {
@@ -37,7 +39,9 @@ public class Menu {
 				switch (result) {
 				case 0:
 					System.out.println("Let the game begin!");
+					System.out.println(sal.getGameBoard());
 					
+					keepGame(sal.getFirstPlayer());
 					
 					break;
 				case 1:
@@ -45,7 +49,7 @@ public class Menu {
 					displayOptions();
 					break;
 				case 2:
-					System.out.println("The number o players exceds the maximum. Max players: 9");
+					System.out.println("The number of players exceeds the maximum. Max players: 9");
 					displayOptions();
 				default:
 					break;
@@ -68,5 +72,58 @@ public class Menu {
 	}
 	
 	public void registerWinner() {
+	}
+	
+	public void keepGame(Player first) {
+		
+		System.out.println("Waiting for break line to throw dices, quit game or start simulation mode");
+		
+		String entry = sc.nextLine();
+		
+		switch (entry) {
+		case "":
+			int resultDice = sal.throwDice();
+			
+			System.out.println("The player " + first.getSymbol() + " threw the dice and got: " + resultDice);
+			
+			sal.getGameBoard().movePlayer(first, resultDice);
+			
+			System.out.println(sal.getGameBoard());
+			
+			if(sal.getGameBoard().searchInRows(sal.getRows()*sal.getColumns(), sal.getGameBoard().getFirst()).empty()) {
+				keepGame(first.getNextPlayerGen());
+			}else {
+				System.out.println("There's a winner! Please, enter the nickname");
+				String nickname = sc.nextLine();
+				
+				System.out.println("Movimientos: " + first.getMoves());
+			}
+			
+			
+			break;
+		
+		case "menu":
+			
+			System.out.println("Game ended");
+			displayOptions();
+			
+			break;
+			
+		case "simul":
+			
+			
+			break;
+			
+		case "num":
+			System.out.println(sal.getGameBoard().initialGrid());
+			keepGame(first);
+			
+		default:
+			System.out.println("Pleaee, choose a valid option");
+			keepGame(sal.getFirstPlayer());
+			break;
+		}
+		
+		
 	}
 }

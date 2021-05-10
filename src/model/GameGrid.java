@@ -1,9 +1,11 @@
 package model;
 
+
 public class GameGrid {
 	private Cell first;
 	private int numRows;
 	private int numColumns;
+	
 	
 	
 	public GameGrid(int numRows, int numColumns) {
@@ -188,6 +190,34 @@ public class GameGrid {
 	}
     //-----------------------------------------------------------------------------------------
 	
+	//Methods to show the grid in initial state 
+	
+	public String initialGrid() {
+		String msg;
+		msg = initialGridRow(first);
+		return msg;
+	}
+
+	private String initialGridRow(Cell firstRow) {
+		String msg = "";
+		if (firstRow != null) {
+			msg = initialGridCol(firstRow) + "\n";
+			msg += initialGridRow(firstRow.getDown());
+		}
+		return msg;
+	}
+
+	private String initialGridCol(Cell current) {
+		String msg = "";
+		if (current != null) {
+			msg = current.initialState();
+			msg += initialGridCol(current.getNext());
+		}
+		return msg;
+	}
+	
+	//----------------------------------------------------------------------------------------
+	
 	//Methods to search a cell by number-------------------------------------------------------
 	public Cell searchInRows(int number, Cell first) {
 		Cell foundCell = null;
@@ -307,44 +337,71 @@ public class GameGrid {
 	//--------------------------------------------------------------------------------------------
 	
 	//Method to move the players------------------------------------------------------------------
-	public boolean movePlayer(Player player) {
+	public boolean movePlayer(Player player, int dice) {
 		
 		Cell lastCell = searchInRows(numRows*numColumns, first);
-		if (lastCell.getFirstPlayer() != null) {//base case
-			return true; 
-		}
+		
 		int initialPos = player.getPosition();
+		
 		Cell initialCell = searchInRows(initialPos, first);
-		SnakesAndLadders snl = new SnakesAndLadders();
-		int finalPos = snl.throwDice() + initialPos;
-		Cell finalCell = searchInRows(finalPos, first);
-		System.out.println("no hay nada");
-		System.out.println(initialPos + "-" + finalPos);
-	    finalCell.addPlayer(player);
-		finalCell.getFirstPlayer().setPosition(finalPos);
-		initialCell.deletePlayer();
+		
+		int finalPos = dice + initialPos;
+		
+		int newMoves = player.getMoves() + 1;
+	    player.setMoves(newMoves);
+		
+		if(finalPos>=numRows*numColumns) {
+			Cell finalCell = searchInRows(numColumns*numRows, first);
+			initialCell.deletePlayer();
+			finalCell.addPlayer(player);
+		}else {
 			
-		if (finalCell.getSnake() != ' ') {
-			initialCell = finalCell;
-			System.out.println("existe snake");
-			Cell firstCell = searchFirst(initialCell.getRow(), getFirst());
-			if (firstCell.getDown() != null) {
-				finalCell = searchInRows(finalCell.getSnake(), firstCell.getDown());
-				finalCell.addPlayer(player);
-				finalCell.getFirstPlayer().setPosition(finalCell.getNumber());
+			Cell finalCell = searchInRows(finalPos, first);
+			
+			System.out.println("no hay nada");
+			
+			System.out.println(initialPos + "-" + finalPos);
+			
+			initialCell.deletePlayer();
+			
+		    finalCell.addPlayer(player);
+		    
+		    
+			//finalCell.getFirstPlayer().setPosition(finalPos);
+			
+				
+			if (finalCell.getSnake() != ' ') {
+				initialCell = finalCell;
+				System.out.println("existe snake");
+				Cell firstCell = searchFirst(initialCell.getRow(), getFirst());
+				if (firstCell.getDown() != null) {
+					finalCell = searchInRows(finalCell.getSnake(), firstCell.getDown());
+					
+					initialCell.deletePlayer();
+					
+					finalCell.addPlayer(player);
+					finalCell.getFirstPlayer().setPosition(finalCell.getNumber());
+					
+					
+				}
+
+			}
+			if (finalCell.getLadder() != 0) {
+				initialCell = finalCell;
+				System.out.println("existe ladder");
+				finalCell = searchInRows(1, finalCell.getRow(), getFirst(), finalCell.getLadder());
+				
 				initialCell.deletePlayer();
 				
-			}
+				finalCell.addPlayer(player);
+				finalCell.getFirstPlayer().setPosition(finalCell.getNumber());
 
+			}
+			
+			
+			
 		}
-		if (finalCell.getLadder() != 0) {
-			initialCell = finalCell;
-			System.out.println("existe ladder");
-			finalCell = searchInRows(1, finalCell.getRow(), getFirst(), finalCell.getLadder());
-			finalCell.addPlayer(player);
-			finalCell.getFirstPlayer().setPosition(finalCell.getNumber());
-			initialCell.deletePlayer();
-		}
+		
 		return false;
 	}
 	

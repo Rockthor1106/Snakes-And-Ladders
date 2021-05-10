@@ -10,9 +10,13 @@ public class Player {
 	private Player nextPlayer;
 	private Player previousPlayer;
 	
+	private Player nextPlayerGen;
+	
 
 	public Player(String symbol) {
 		this.symbol = symbol;
+		position=1;
+		moves=0;
 	}
 	
 	public Player() {
@@ -53,6 +57,14 @@ public class Player {
 
 	public void setPreviousPlayer(Player previousPlayer) {
 		this.previousPlayer = previousPlayer;
+	}
+
+	public Player getNextPlayerGen() {
+		return nextPlayerGen;
+	}
+
+	public void setNextPlayerGen(Player nextPlayerGen) {
+		this.nextPlayerGen = nextPlayerGen;
 	}
 	
 //	public String toString() {

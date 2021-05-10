@@ -82,29 +82,45 @@ public class Cell{
 	public String toString() {
 		String msg = "";
 		
+		String ladderString="";
+		
+		if(ladder!=0) {
+			ladderString=String.valueOf(ladder);
+		}
+		
 		if (number >= 10) {
 			if (firstPlayer == null) {
-				msg= "["+ ladder + " " + snake +"]";
+				msg= "["+ ladderString + " " + snake +"]";
 			}
 			else {
-				msg= "["+ ladder + " " + snake + " " + showPlayers() + "]";
+				msg= "["+ ladderString + " " + snake + " " + showPlayers() + "]";
 			}
-			//msg = "["+number+"]";
-			//msg = "["+number+ " " + snake +  " " + ladder + "]" ;
 			
 		}
 		else {
 			if (firstPlayer == null) {
-				msg=  "["+ ladder + " " + snake +"]";
+				msg=  "["+ ladderString + " " + snake +"]";
 			}
 			else {
-				msg= "["+ ladder + " " + snake + " " + showPlayers() + "]";
+				msg= "["+ ladderString + " " + snake + " " + showPlayers() + "]";
 			}
-			//msg = "[ "+number+"]";
-			//msg= "[" + ladder + " " +snake + "]" ;
 			
 		}
 		return msg;
+	}
+	
+	public String initialState() {
+		String msg = "";
+		String ladderString="";
+		
+		if(ladder!=0) {
+			ladderString=String.valueOf(ladder);
+		}
+		
+		msg= "["+ number+ " " + "|" + ladderString + " " + snake +"]";
+		
+		return msg;
+		
 	}
 	
 	public char getSnake() {
@@ -125,11 +141,12 @@ public class Cell{
 	
 	//Method to add players---------------------------------------------------
 	public void addPlayer(Player newPlayer) {
+		
+		newPlayer.setPosition(number);
 		if (firstPlayer == null) {
 			firstPlayer = newPlayer;
 			firstPlayer.setNextPlayer(newPlayer);
 			firstPlayer.setPreviousPlayer(newPlayer);
-			firstPlayer.setPosition(1);
 		}
 		else {
 			Player lastPlayer = firstPlayer.getPreviousPlayer();
@@ -137,7 +154,6 @@ public class Cell{
 			newPlayer.setPreviousPlayer(lastPlayer);
 			firstPlayer.setPreviousPlayer(newPlayer);
 			lastPlayer.setNextPlayer(newPlayer);
-			lastPlayer.setPosition(1);
 		}
 	}
 	//-------------------------------------------------------------------------

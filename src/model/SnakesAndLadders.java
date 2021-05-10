@@ -10,6 +10,16 @@ public class SnakesAndLadders {
 		
 	private GameGrid gameBoard;
 	
+	private Player firstPlayer;
+	
+	public Player getFirstPlayer() {
+		return firstPlayer;
+	}
+
+	public void setFirstPlayer(Player firstPlayer) {
+		this.firstPlayer = firstPlayer;
+	}
+
 	public SnakesAndLadders() {
 		
 	}
@@ -34,11 +44,11 @@ public class SnakesAndLadders {
 		}else if(players.length()>9) {
 			return 2;
 		}else if(players.length()>1) {
-//			createPlayers(players, 0);
+			createPlayers(players, 0);
 			createBoard();
 		}else if(players.length()==1) {
-//			int numPlayers=players.length();
-//			createPlayersRandom(numPlayers);
+			int numPlayers=players.length();
+			createPlayersRandom(numPlayers);
 			createBoard();
 		}
 		return 0;
@@ -52,7 +62,39 @@ public class SnakesAndLadders {
 		createSnakes(65, maxSnakes);
 		
 		createLadders(1, ladders);
+		
+		setPlayersStart();
 				
+	}
+	
+	private void setPlayersStart() {
+		if(firstPlayer==null) {
+			
+		}else {
+			Cell tmp = gameBoard.searchInRows(1, gameBoard.getFirst());
+			tmp.addPlayer(firstPlayer);
+			
+			if(firstPlayer.getNextPlayerGen().equals(firstPlayer)) {
+				
+			}else {
+				setPlayersStart(firstPlayer.getNextPlayerGen());
+			}
+			
+		}
+	}
+	
+	private void setPlayersStart(Player add) {
+		
+		Cell tmp = gameBoard.searchInRows(1, gameBoard.getFirst());
+		
+		if(add.getNextPlayerGen().equals(firstPlayer)) {
+			tmp.addPlayer(add);
+		}else {
+			tmp.addPlayer(add);
+			setPlayersStart(add.getNextPlayerGen());
+		}
+		
+		
 	}
 
 	public String generateSymbols() {
@@ -99,42 +141,48 @@ public class SnakesAndLadders {
 		return dices;
 	}
 	
-//	public void createPlayers(String symbol, int num) {
-//		
-//		if(num<symbol.length()) {
-//			Player newPlayer = new Player(String.valueOf(symbol.charAt(num)));
-//			addPlayer(newPlayer);
-//			createPlayers(symbol, num+1);
-//			
-//		}
-//	}
-//	
-//	public void createPlayersRandom(int num) {
-//		
-//		if(num>0) {
-//			Player newPlayer = new Player(generateSymbols());
-//			addPlayer(newPlayer);
-//			createPlayersRandom(num-1);
-//		}
-//	}
-//	
-//	public void addPlayer(Player current, Player newPlayer) {
-//	
-//		if(current.getNextPlayer()==null) {
-//			current.setNextPlayer(newPlayer);
-//		}else {
-//			Player nextPlayer = current.getNextPlayer();
-//			addPlayer(nextPlayer, newPlayer);
-//		}
-//	}
-//	
-//	public void addPlayer(Player newPlayer) {
-//		if(firstPlayer==null) {
-//			firstPlayer=newPlayer;
-//		}else {
-//			addPlayer(firstPlayer, newPlayer);
-//		}
-//	}
+	public void createPlayers(String symbol, int num) {
+		
+		if(num<symbol.length()) {
+			Player newPlayer = new Player(String.valueOf(symbol.charAt(num)));
+			addPlayer(newPlayer);
+			createPlayers(symbol, num+1);
+			
+		}
+	}
+	
+	public void createPlayersRandom(int num) {
+		
+		if(num>0) {
+			Player newPlayer = new Player(generateSymbols());
+			addPlayer(newPlayer);
+			createPlayersRandom(num-1);
+		}
+	}
+	
+	public void addPlayer(Player newPlayer) {
+
+		if(firstPlayer==null) {
+			firstPlayer=newPlayer;
+			firstPlayer.setNextPlayerGen(firstPlayer);
+		}else {
+			addPlayer(firstPlayer, newPlayer);
+		}
+
+	}
+
+	private void addPlayer(Player current, Player newPlayer) {
+
+		if(current.getNextPlayerGen().equals(firstPlayer)) {
+			current.setNextPlayerGen(newPlayer);
+			newPlayer.setNextPlayerGen(firstPlayer);
+		}else {
+			addPlayer(current.getNextPlayerGen(), newPlayer);
+		}
+
+	}
+	
+	
 	
 	public void createSnakes(int code, int max) {
 		
