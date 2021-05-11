@@ -3,9 +3,6 @@ package ui;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
-
-
-//import model.BinarySearchTree;
 import model.Player;
 import model.SnakesAndLadders;
 import model.Winner;
@@ -117,8 +114,10 @@ public class Menu {
 			if(sal.getGameBoard().searchInRows(sal.getRows()*sal.getColumns(), sal.getGameBoard().getFirst()).empty()) {
 				keepGame(first.getNextPlayerGen());
 			}else {
+
 				registerWinner();
 			}
+
 			
 			
 			break;

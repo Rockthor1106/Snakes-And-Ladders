@@ -1,17 +1,18 @@
 package model;
 
-
 public class GameGrid {
 	private Cell first;
 	private int numRows;
 	private int numColumns;
 	
-	
-	
 	public GameGrid(int numRows, int numColumns) {
 		this.numRows = numRows;
 		this.numColumns = numColumns; 
 		createMatrix();
+	}
+	
+	public GameGrid() {
+		
 	}
 	
 	public Cell getFirst() {
@@ -337,10 +338,8 @@ public class GameGrid {
 	//--------------------------------------------------------------------------------------------
 	
 	//Method to move the players------------------------------------------------------------------
-	public boolean movePlayer(Player player, int dice) {
-		
-		Cell lastCell = searchInRows(numRows*numColumns, first);
-		
+	public void movePlayer(Player player, int dice) {
+				
 		int initialPos = player.getPosition();
 		
 		Cell initialCell = searchInRows(initialPos, first);
@@ -350,59 +349,48 @@ public class GameGrid {
 		int newMoves = player.getMoves() + 1;
 	    player.setMoves(newMoves);
 		
-		if(finalPos>=numRows*numColumns) {
+		if(finalPos >= numRows*numColumns) {
+			
 			Cell finalCell = searchInRows(numColumns*numRows, first);
-			initialCell.deletePlayer();
+			initialCell.deletePlayer();	
 			finalCell.addPlayer(player);
-		}else {
+			
+		}
+		else {
 			
 			Cell finalCell = searchInRows(finalPos, first);
+			initialCell.deletePlayer();	
+			finalCell.addPlayer(player);  
+			finalCell.getFirstPlayer().setPosition(finalPos);
 			
-			System.out.println("no hay nada");
-			
-			System.out.println(initialPos + "-" + finalPos);
-			
-			initialCell.deletePlayer();
-			
-		    finalCell.addPlayer(player);
-		    
-		    
-			//finalCell.getFirstPlayer().setPosition(finalPos);
-			
-				
-			if (finalCell.getSnake() != ' ') {
-				initialCell = finalCell;
-				System.out.println("existe snake");
-				Cell firstCell = searchFirst(initialCell.getRow(), getFirst());
-				if (firstCell.getDown() != null) {
-					finalCell = searchInRows(finalCell.getSnake(), firstCell.getDown());
-					
-					initialCell.deletePlayer();
-					
-					finalCell.addPlayer(player);
-					finalCell.getFirstPlayer().setPosition(finalCell.getNumber());
-					
-					
-				}
-
-			}
 			if (finalCell.getLadder() != 0) {
+				
 				initialCell = finalCell;
-				System.out.println("existe ladder");
 				finalCell = searchInRows(1, finalCell.getRow(), getFirst(), finalCell.getLadder());
-				
 				initialCell.deletePlayer();
-				
 				finalCell.addPlayer(player);
 				finalCell.getFirstPlayer().setPosition(finalCell.getNumber());
 
 			}
 			
-			
+			if (finalCell.getSnake() != ' ') {
+				initialCell = finalCell;
+				Cell firstCell = searchFirst(initialCell.getRow(), getFirst());
+				if (firstCell.getDown() != null) {
+					
+					finalCell = searchInRows(finalCell.getSnake(), firstCell.getDown());
+					if (finalCell != null) {
+							initialCell.deletePlayer();
+							finalCell.addPlayer(player);
+							finalCell.getFirstPlayer().setPosition(finalCell.getNumber());
+					}
+
+				}
+					
+			}
 			
 		}
 		
-		return false;
 	}
 	
 	//---------------------------------------------------------------------------------------------
