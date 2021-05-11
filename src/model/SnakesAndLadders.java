@@ -12,15 +12,13 @@ public class SnakesAndLadders {
 	
 	private Player firstPlayer;
 	
-	public Player getFirstPlayer() {
-		return firstPlayer;
-	}
-
-	public void setFirstPlayer(Player firstPlayer) {
-		this.firstPlayer = firstPlayer;
-	}
+	private BinarySearchTree bstWinners;
+	
+	
 
 	public SnakesAndLadders() {
+		
+		bstWinners= new BinarySearchTree();
 		
 	}
 	
@@ -47,7 +45,7 @@ public class SnakesAndLadders {
 			createPlayers(players, 0);
 			createBoard();
 		}else if(players.length()==1) {
-			int numPlayers=players.length();
+			int numPlayers=Integer.parseInt(players);
 			createPlayersRandom(numPlayers);
 			createBoard();
 		}
@@ -132,8 +130,28 @@ public class SnakesAndLadders {
 			symbol = "*";
 
 		}
-		return symbol;
+		
+		if(symbolExist(firstPlayer, symbol)) {
+			return generateSymbols();
+		}else {
+			return symbol;
+		}
 
+	}
+	
+	public boolean symbolExist(Player first, String symbol) {
+		if(first==null) {
+			return false;
+		}else {
+			if(first.getSymbol().equals(symbol)) {
+				return true;
+			}else {
+				if(!first.getNextPlayerGen().equals(firstPlayer)) {
+					return symbolExist(first.getNextPlayerGen(), symbol);
+				}
+			}
+		}
+		return false;
 	}
 
 	public int throwDice() {
@@ -295,6 +313,26 @@ public class SnakesAndLadders {
 	
 	public void setBoard(GameGrid game) {
 		gameBoard=game;
+	}
+	
+	public BinarySearchTree getBstWinners() {
+		return bstWinners;
+	}
+
+	public int getLadders() {
+		return ladders;
+	}
+
+	public int getSnakes() {
+		return snakes;
+	}
+
+	public Player getFirstPlayer() {
+		return firstPlayer;
+	}
+
+	public void setFirstPlayer(Player firstPlayer) {
+		this.firstPlayer = firstPlayer;
 	}
 
 }

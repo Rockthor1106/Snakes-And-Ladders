@@ -6,6 +6,7 @@ import java.util.Scanner;
 import model.BinarySearchTree;
 import model.Player;
 import model.SnakesAndLadders;
+import model.Winner;
 
 public class Menu {
 	
@@ -72,6 +73,17 @@ public class Menu {
 	}
 	
 	public void registerWinner() {
+		
+		Player winner = sal.getGameBoard().searchInRows(sal.getColumns()*sal.getRows(), sal.getGameBoard().getFirst()).getFirstPlayer();
+		String winnerSymbol = winner.getSymbol();
+		System.out.println("There's a winner! Player: " + winnerSymbol + " Please, enter the nickname");
+		String nickname = sc.nextLine();
+		int score = winner.getMoves()* (sal.getColumns()*sal.getRows());
+		String game = "Columns: " + sal.getColumns() + "\n" + "Rows: " + sal.getRows() + "\n" + "Snakes: " + sal.getSnakes() + "\n" + "Ladders: " + sal.getLadders();
+		Winner newWinner = new Winner(winnerSymbol, nickname, score, game);
+		sal.getBstWinners().addWinner(newWinner);
+		System.out.println(newWinner.toString());
+		displayOptions();
 	}
 	
 	public void keepGame(Player first) {
@@ -93,10 +105,7 @@ public class Menu {
 			if(sal.getGameBoard().searchInRows(sal.getRows()*sal.getColumns(), sal.getGameBoard().getFirst()).empty()) {
 				keepGame(first.getNextPlayerGen());
 			}else {
-				System.out.println("There's a winner! Please, enter the nickname");
-				String nickname = sc.nextLine();
-				
-				System.out.println("Movimientos: " + first.getMoves());
+				registerWinner();
 			}
 			
 			
@@ -111,7 +120,12 @@ public class Menu {
 			
 		case "simul":
 			
-			
+			System.out.println("Simulation mode started");
+			try {
+				simulMode(first);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			break;
 			
 		case "num":
@@ -126,4 +140,27 @@ public class Menu {
 		
 		
 	}
+	
+	public void simulMode(Player first) throws InterruptedException {
+		
+		int resultDice = sal.throwDice();
+		
+		System.out.println("The player " + first.getSymbol() + " threw the dice and got: " + resultDice);
+		
+		sal.getGameBoard().movePlayer(first, resultDice);
+		
+		System.out.println(sal.getGameBoard());
+		
+		if(sal.getGameBoard().searchInRows(sal.getRows()*sal.getColumns(), sal.getGameBoard().getFirst()).empty()) {
+			Thread.sleep(2000);
+			simulMode(first.getNextPlayerGen());
+		}else {
+			registerWinner();
+		}
+		
+		
+	}
+	
+
+		
 }
