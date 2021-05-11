@@ -4,8 +4,10 @@ import java.util.Scanner;
 
 
 import model.BinarySearchTree;
+import model.GameGrid;
 import model.Player;
 import model.SnakesAndLadders;
+import model.Winner;
 
 public class Menu {
 	
@@ -97,7 +99,9 @@ public class Menu {
 				String nickname = sc.nextLine();
 				
 				System.out.println("Movimientos: " + first.getMoves());
-			}
+
+			}				
+				System.out.println("Movimientos: " + first.getMoves());
 			
 			
 			break;

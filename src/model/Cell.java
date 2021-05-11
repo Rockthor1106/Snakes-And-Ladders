@@ -188,17 +188,17 @@ public class Cell{
 		String msg = "";
 		if (!empty()) {
 			msg = firstPlayer.getSymbol();
-			msg += x(firstPlayer.getNextPlayer());
+			msg += showPlayers(firstPlayer.getNextPlayer());
 		}
 		return msg;
 	}
 	
-	public String x (Player aux) {
+	public String showPlayers(Player aux) {
 		String msg = "";
 		if (aux != firstPlayer) {
 			msg = aux.getSymbol();
 			aux = aux.getNextPlayer();
-			msg += x(aux);
+			msg += showPlayers(aux);
 		}
 		return msg;
 	}
