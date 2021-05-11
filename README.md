@@ -3,7 +3,7 @@
 ## About 
 
 * This is a little modified version of the clasical game Snakes and Ladders. It allows the players to play through the console, 
-it has a maximum of 8 players and they can arrange the game board as they please.
+it has a maximum of 9 players and they can arrange the game board as they please.
 * Project status: working
 
 ## Table of contents
@@ -73,8 +73,8 @@ their score. After this, the main menu will be shown.
 
 ## Resources (Documentation and other links)
 
-* Class diagram: 
-* Requirements elicitation (Spanish):
+* Class diagram: (https://github.com/Rockthor1106/Snakes-And-Ladders/blob/master/docs/Snakes_And_Ladders_Class_Diagram.jpg)
+* Requirements elicitation (Spanish): (https://github.com/Rockthor1106/Snakes-And-Ladders/blob/master/docs/Snakes_And_Ladders_RequirementsElicitation.docx)
 
 ## Contributors
 
