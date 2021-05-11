@@ -1,5 +1,6 @@
 package ui;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import model.SnakesAndLadders;
@@ -18,6 +19,13 @@ public class Main {
 	public static void main(String[] args) {
 		
 		Main ppal = new Main();
+		
+		try {
+			game.loadWinners();
+		} catch (ClassNotFoundException | IOException e) {
+		
+			e.printStackTrace();
+		}
 		
 //		GameGrid gameGrid = new GameGrid(10,10);
 //		Player newPlayer = new Player("#");
@@ -62,7 +70,11 @@ public class Main {
 		
 //		gameGrid.movePlayer(newPlayer);
 		
-		menu.displayOptions();
+		try {
+			menu.displayOptions();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		
 

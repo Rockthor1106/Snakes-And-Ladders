@@ -1,6 +1,13 @@
 package model;
 
-public class BinarySearchTree {
+import java.io.Serializable;
+
+public class BinarySearchTree implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private Winner root;
 	
 	public BinarySearchTree() {
@@ -63,5 +70,22 @@ public class BinarySearchTree {
 		}
 	}
 	//---------------------------------------------------------------------------------
+	
+	//Method to show the content of the tree 
+		
+	public String showTree(Winner root){
+	    String result = "";
+	    if (root == null)
+	        return "";
+	    /*if(root.left!=null) {
+	    	
+	    }*/
+	    result += showTree(root.left);
+	    result += root.toString();
+	    result += showTree(root.right);
+	    return result;
+	}
+	
+	
 }
 

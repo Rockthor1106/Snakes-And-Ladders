@@ -1,7 +1,13 @@
 package model;
 
-public class Winner extends Player {
+import java.io.Serializable;
+
+public class Winner extends Player implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String nickname;
 	private int score;
 	private String game; //this String contains the characteristics of the game grid and the game in general
@@ -43,11 +49,12 @@ public class Winner extends Player {
 	}	
 	
 	public String toString() {
-		String msg = "";
-		msg = "Nickname: " + nickname + "\n";
+		String msg = "************************************\n";
+		msg += "Nickname: " + nickname + "\n";
 		msg += "Symbol: " + getSymbol() + "\n";
 		msg += "Score: " + score + "\n";
-		msg += game;
+		msg += game + "\n";
+		msg += "************************************\n";
 		return msg;
 	}
 	

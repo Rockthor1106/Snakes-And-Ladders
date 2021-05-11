@@ -1,5 +1,13 @@
 package model;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 public class SnakesAndLadders {
 	
 	private int rows;
@@ -14,11 +22,28 @@ public class SnakesAndLadders {
 	
 	private BinarySearchTree bstWinners;
 	
+	public final static String SAVE_PATH_FILE_WINNER = "data/winners.sal";
 	
-
 	public SnakesAndLadders() {
 		
 		bstWinners= new BinarySearchTree();
+		
+	}
+	
+	public void saveWinners() throws FileNotFoundException, IOException {
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SAVE_PATH_FILE_WINNER));
+		oos.writeObject(bstWinners);
+		oos.close();
+	}
+	
+	public void loadWinners() throws FileNotFoundException, IOException, ClassNotFoundException {
+		
+	File f = new File(SAVE_PATH_FILE_WINNER);
+	if(f.exists()){
+	      ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
+	      bstWinners = (BinarySearchTree)ois.readObject();
+	      ois.close();
+	    }
 		
 	}
 	

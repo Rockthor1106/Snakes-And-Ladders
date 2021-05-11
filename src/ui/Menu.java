@@ -1,9 +1,11 @@
 package ui;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 
-import model.BinarySearchTree;
+//import model.BinarySearchTree;
 import model.Player;
 import model.SnakesAndLadders;
 import model.Winner;
@@ -19,7 +21,7 @@ public class Menu {
 		sal=snakesAndLadders;
 	}
 
-	public void displayOptions() {
+	public void displayOptions() throws FileNotFoundException, IOException {
 		System.out.println("Welcome to Snakes and Ladders. These are the options"+ 
 				"\n 1) Play \n " + 
 				"2) Show best players \n " + 
@@ -58,8 +60,10 @@ public class Menu {
 			break;
 		case 2:
 			System.out.println("^o^ Podium of the best players ^o^");
-			BinarySearchTree bSearchTree = new BinarySearchTree();
-			bSearchTree.inOrden(bSearchTree.getRoot());
+			//BinarySearchTree bSearchTree = new BinarySearchTree();
+			//bSearchTree.inOrden(bSearchTree.getRoot());
+			System.out.println(sal.getBstWinners().showTree(sal.getBstWinners().getRoot()));
+			displayOptions();
 			break;
 		case 3: 
 			System.exit(0);
@@ -72,21 +76,29 @@ public class Menu {
 				
 	}
 	
-	public void registerWinner() {
+	public void registerWinner() throws FileNotFoundException, IOException {
 		
 		Player winner = sal.getGameBoard().searchInRows(sal.getColumns()*sal.getRows(), sal.getGameBoard().getFirst()).getFirstPlayer();
 		String winnerSymbol = winner.getSymbol();
+		
 		System.out.println("There's a winner! Player: " + winnerSymbol + " Please, enter the nickname");
+		
 		String nickname = sc.nextLine();
+		
 		int score = winner.getMoves()* (sal.getColumns()*sal.getRows());
+		
 		String game = "Columns: " + sal.getColumns() + "\n" + "Rows: " + sal.getRows() + "\n" + "Snakes: " + sal.getSnakes() + "\n" + "Ladders: " + sal.getLadders();
+		
 		Winner newWinner = new Winner(winnerSymbol, nickname, score, game);
+		
 		sal.getBstWinners().addWinner(newWinner);
+		sal.saveWinners();
+		
 		System.out.println(newWinner.toString());
 		displayOptions();
 	}
 	
-	public void keepGame(Player first) {
+	public void keepGame(Player first) throws FileNotFoundException, IOException {
 		
 		System.out.println("Waiting for break line to throw dices, quit game or start simulation mode");
 		
@@ -141,7 +153,7 @@ public class Menu {
 		
 	}
 	
-	public void simulMode(Player first) throws InterruptedException {
+	public void simulMode(Player first) throws InterruptedException, FileNotFoundException, IOException {
 		
 		int resultDice = sal.throwDice();
 		
