@@ -3,9 +3,7 @@ package model;
 import java.io.Serializable;
 
 public class BinarySearchTree implements Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	
 	private Winner root;

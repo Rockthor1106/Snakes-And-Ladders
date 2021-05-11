@@ -22,7 +22,7 @@ public class SnakesAndLadders {
 	
 	private BinarySearchTree bstWinners;
 	
-	public final static String SAVE_PATH_FILE_WINNER = "data/winners.sal";
+	public final static String SAVE_PATH_FILE_WINNER = "winners.sal";
 	
 	public SnakesAndLadders() {
 		
@@ -165,7 +165,7 @@ public class SnakesAndLadders {
 	}
 	
 	public boolean symbolExist(Player first, String symbol) {
-		if(first==null) {
+		if(first == null) {
 			return false;
 		}else {
 			if(first.getSymbol().equals(symbol)) {
