@@ -367,10 +367,11 @@ public class GameGrid {
 				
 				initialCell = finalCell;
 				finalCell = searchInRows(1, finalCell.getRow(), getFirst(), finalCell.getLadder());
-				initialCell.deletePlayer();
-				finalCell.addPlayer(player);
-				finalCell.getFirstPlayer().setPosition(finalCell.getNumber());
-
+				if (finalCell != null) {
+					initialCell.deletePlayer();
+					finalCell.addPlayer(player);
+					finalCell.getFirstPlayer().setPosition(finalCell.getNumber());
+				}
 			}
 			
 			if (finalCell.getSnake() != ' ') {
