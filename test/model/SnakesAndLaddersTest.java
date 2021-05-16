@@ -14,29 +14,30 @@ class SnakesAndLaddersTest {
 	}
 	
 	//This test verifies if the players are created from an array String with the symbols
-	
-//	@Test
-//	public void testCreatePlayer() {
-//		setupScenary1();
-//		String symbols = "$#";
-//		sal.createPlayers(symbols, 0);
-//		
-//		assertEquals(sal.getFirstPlayer().getSymbol(), "$");
-//		Player test = sal.getFirstPlayer().getNextPlayer();
-//		assertEquals(test.getSymbol(), "#");
-//		
-//		
-//	}
+	@Test
+	public void testCreatePlayer() {
+		setupScenary1();
+		
+		sal.createPlayers("#$%&", 0);
+		
+		assertEquals("#", sal.getFirstPlayer().getSymbol());
+		assertEquals("$", sal.getFirstPlayer().getNextPlayerGen().getSymbol());
+		assertEquals("%", sal.getFirstPlayer().getNextPlayerGen().getNextPlayerGen().getSymbol());
+		assertEquals("&", sal.getFirstPlayer().getNextPlayerGen().getNextPlayerGen().getNextPlayerGen().getSymbol());
+	}
 	
 	//This test verifies if the players are created with a random symbol
-//	@Test
-//	public void testCreatePlayersRandom() {
-//		setupScenary1();
-//		
-//		sal.createPlayersRandom(3);
-//		assertNotEquals(sal.getFirstPlayer(), null);
-//		assertNotEquals(sal.getFirstPlayer().getNextPlayer(), null);
-//		assertNotEquals(sal.getFirstPlayer().getNextPlayer().getNextPlayer(), null);
-//	}
+	@Test
+	public void testCreatePlayersRandom() {
+		setupScenary1();
+		
+		sal.createPlayersRandom(3);
+		
+		assertNotEquals(sal.getFirstPlayer(), null);
+		assertNotEquals(sal.getFirstPlayer().getNextPlayerGen(), null);
+		assertNotEquals(sal.getFirstPlayer().getNextPlayerGen().getNextPlayerGen(), null);
+		//if the nextPlayerGen is verified, it will not be null either since the list of players is circular
+
+	}
 	
 }

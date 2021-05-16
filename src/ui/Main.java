@@ -4,11 +4,6 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import model.SnakesAndLadders;
-import model.Winner;
-import model.BinarySearchTree;
-import model.Cell;
-import model.GameGrid;
-import model.Player;
 
 public class Main {
 	
@@ -18,12 +13,11 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		Main ppal = new Main();
+	    new Main();
 		
 		try {
 			game.loadWinners();
 		} catch (ClassNotFoundException | IOException e) {
-		
 			e.printStackTrace();
 		}
 		
@@ -38,8 +32,6 @@ public class Main {
 	public Main() {
 		game = new SnakesAndLadders();
 		menu = new Menu(game);
-		
 	}
-
 }
 

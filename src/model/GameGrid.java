@@ -191,8 +191,7 @@ public class GameGrid {
 	}
     //-----------------------------------------------------------------------------------------
 	
-	//Methods to show the grid in initial state 
-	
+	//Methods to show the grid in initial state------------------------------------------------
 	public String initialGrid() {
 		String msg;
 		msg = initialGridRow(first);
@@ -216,7 +215,6 @@ public class GameGrid {
 		}
 		return msg;
 	}
-	
 	//----------------------------------------------------------------------------------------
 	
 	//Methods to search a cell by number-------------------------------------------------------
@@ -337,7 +335,7 @@ public class GameGrid {
 	}
 	//--------------------------------------------------------------------------------------------
 	
-	//Method to move the players------------------------------------------------------------------
+	//Method to move players------------------------------------------------------------------
 	public void movePlayer(Player player, int dice) {
 				
 		int initialPos = player.getPosition();

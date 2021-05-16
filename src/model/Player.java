@@ -4,13 +4,8 @@ import java.io.Serializable;
 
 public class Player implements Serializable {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	/**
-	 * 
-	 */
+
 	private String symbol;
 	private int position;
 	private int moves;
@@ -19,7 +14,6 @@ public class Player implements Serializable {
 	private Player previousPlayer;
 	
 	private Player nextPlayerGen;
-	
 
 	public Player(String symbol) {
 		this.symbol = symbol;

@@ -22,7 +22,7 @@ public class SnakesAndLadders {
 	
 	private BinarySearchTree bstWinners;
 	
-	public final static String SAVE_PATH_FILE_WINNER = "winners.sal";
+	public final static String SAVE_PATH_FILE_WINNER = "data/winners.sal";
 	
 	public SnakesAndLadders() {
 		
@@ -52,7 +52,7 @@ public class SnakesAndLadders {
 	 * 1 when the snakes and ladders don't fit the grid
 	 * 2 when there's more than 9 players
 	 */
-	public int separateEntry2(String entry) {
+	public int separateEntry(String entry) {
 		String[] parts = entry.split(" ");
 		
 		rows = Integer.parseInt(parts[0]);
@@ -185,7 +185,7 @@ public class SnakesAndLadders {
 	}
 	
 	public void createPlayers(String symbol, int num) {
-		
+	
 		if(num<symbol.length()) {
 			Player newPlayer = new Player(String.valueOf(symbol.charAt(num)));
 			addPlayer(newPlayer);
@@ -224,8 +224,6 @@ public class SnakesAndLadders {
 		}
 
 	}
-	
-	
 	
 	public void createSnakes(int code, int max) {
 		

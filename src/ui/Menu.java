@@ -23,7 +23,7 @@ public class Menu {
 				"\n 1) Play \n " + 
 				"2) Show best players \n " + 
 				"3) Close the game \n ");
-		start = Integer.parseInt(sc.nextLine()); //this line avoid the problem when is use after nextLine() 
+		start = Integer.parseInt(sc.nextLine()); //this line avoid the problem when is use nextLine() after
 		
 		switch (start) {
 		case 1:
@@ -34,9 +34,10 @@ public class Menu {
 					"\n* ! O X % $ # + &"+
 					"\nEntry example: 5 4 2 3 #%*");
 			entry = sc.nextLine();
-			int result = sal.separateEntry2(entry);
 			
-				switch (result) {
+			int result = sal.separateEntry(entry);
+			
+			switch (result) {
 				case 0:
 					System.out.println("Let the game begin!");
 					System.out.println(sal.getGameBoard());
@@ -57,8 +58,6 @@ public class Menu {
 			break;
 		case 2:
 			System.out.println("^o^ Podium of the best players ^o^");
-			//BinarySearchTree bSearchTree = new BinarySearchTree();
-			//bSearchTree.inOrden(bSearchTree.getRoot());
 			System.out.println(sal.getBstWinners().showTree(sal.getBstWinners().getRoot()));
 			displayOptions();
 			break;
@@ -92,7 +91,11 @@ public class Menu {
 		sal.saveWinners();
 		
 		System.out.println(newWinner.toString());
+		
+		sal.setFirstPlayer(null); //clean the list of player before to start a new game
+		
 		displayOptions();
+		
 	}
 	
 	public void keepGame(Player first) throws FileNotFoundException, IOException {
@@ -118,8 +121,6 @@ public class Menu {
 				registerWinner();
 			}
 
-			
-			
 			break;
 		
 		case "menu":
@@ -149,7 +150,6 @@ public class Menu {
 			break;
 		}
 		
-		
 	}
 	
 	public void simulMode(Player first) throws InterruptedException, FileNotFoundException, IOException {
@@ -169,9 +169,6 @@ public class Menu {
 			registerWinner();
 		}
 		
-		
 	}
 	
-
-		
 }
