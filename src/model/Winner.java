@@ -8,6 +8,7 @@ public class Winner extends Player implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	private String nickname;
 	private int score;
 	private String game; //this String contains the characteristics of the game grid and the game in general

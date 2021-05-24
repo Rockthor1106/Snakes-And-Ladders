@@ -18,6 +18,13 @@ public class Menu {
 		sal=snakesAndLadders;
 	}
 
+	/**
+	 * This method shows the user the available options and executes one or call the designed methods for the others
+	 * <b> pre: </b> sal is initialized <br>
+	 * <b> pos: </b> <br>
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	public void displayOptions() throws FileNotFoundException, IOException {
 		System.out.println("Welcome to Snakes and Ladders. These are the options"+ 
 				"\n 1) Play \n " + 
@@ -72,6 +79,17 @@ public class Menu {
 				
 	}
 	
+	
+	
+	/**
+	 * This method asks the user for the necessary information to save the winner of a game,
+	 * including game conditions, nickname and calculates the score. Then shows the winner information and
+	 * finally, displays main menu 
+	 * <b> pre: </b> <br>
+	 * <b> pos: </b> bstWinners binary search tree in sal contains a new winner <br>
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	public void registerWinner() throws FileNotFoundException, IOException {
 		
 		Player winner = sal.getGameBoard().searchInRows(sal.getColumns()*sal.getRows(), sal.getGameBoard().getFirst()).getFirstPlayer();
@@ -98,6 +116,17 @@ public class Menu {
 		
 	}
 	
+	
+	
+	/**
+	 * This method is in charge to continue the game. It allows the users to throw the dice, move through the 
+	 * game board and use the key words 
+	 * <b> pre: </b> sal is initialized, its attribute firstPlayer != null <br>
+	 * <b> pos: </b> <br>
+	 * @param first, the first player in the circular linked list contained in sal 
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	public void keepGame(Player first) throws FileNotFoundException, IOException {
 		
 		System.out.println("Waiting for break line to throw dices, quit game or start simulation mode");
@@ -152,6 +181,17 @@ public class Menu {
 		
 	}
 	
+	
+	
+	/**
+	 * This method powers the simulation mode, the users just see automatic movements till one of the players win
+	 * <b> pre: </b> sal is initialized, its attribute firstPlayer != null <br>
+	 * <b> pos: </b> <br>
+	 * @param first, the first player in the circular linked list contained in sal 
+	 * @throws InterruptedException
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	public void simulMode(Player first) throws InterruptedException, FileNotFoundException, IOException {
 		
 		int resultDice = sal.throwDice();

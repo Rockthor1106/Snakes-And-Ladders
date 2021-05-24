@@ -109,6 +109,12 @@ public class Cell{
 		return msg;
 	}
 	
+	/**
+	 * It collects the initial information of the cell, that is its identifier and if it contains a snake or a ladder
+	 * <b> pre: </b> ladder!= null, number!= null, snake!=null <br>
+	 * <b> pos: </b> <br>
+	 * @return msg, String that contains the collected information
+	 */
 	public String initialState() {
 		String msg = "";
 		String ladderString="";
@@ -140,6 +146,14 @@ public class Cell{
 	}
 	
 	//Method to add players---------------------------------------------------
+	
+	
+	/**
+	 * This method adds a new player in the double linked list started by firstPlayer
+	 * <b> pre: </b> <br>
+	 * <b> pos: </b> The double linked list contained in firstPlayer has a new element<br>
+	 * @param newPlayer, the player that will be added to the list 
+	 */
 	public void addPlayer(Player newPlayer) {
 		
 		newPlayer.setPosition(number);
@@ -159,6 +173,12 @@ public class Cell{
 	//-------------------------------------------------------------------------
 	
 	//Method to delete the first player----------------------------------------
+	
+	/**
+	 * This method deletes the first player in the double linked list contained in firstPlayer
+	 * <b> pre: </b> <br>
+	 * <b> pos: </b> The double linked list contained in firstPlayer has one element less and the firstPlayer is reasigned <br>
+	 */
 	public void deletePlayer() {
 		Player lastPlayer = firstPlayer.getPreviousPlayer();
 		if (firstPlayer == lastPlayer) {
@@ -175,6 +195,14 @@ public class Cell{
 	//-------------------------------------------------------------------------
 	
 	//Methods to show the list of players within a cell------------------------
+	
+	
+	/**
+	 * This method checks if the double linked list contained in firstPlayer is empty
+	 * <b> pre: </b> <br>
+	 * <b> pos: </b> <br>
+	 * @return a boolean that is true if it's empty, false otherwise 
+	 */
 	public boolean empty() {
 		if (firstPlayer == null) {
 			return true;
@@ -184,6 +212,12 @@ public class Cell{
 		}
 	}
 	
+	/**
+	 * This method shows the players that are currently in the double linked list 
+	 * <b> pre: </b> <br>
+	 * <b> pos: </b> <br>
+	 * @return msg, String that contains the symbols of all the players in the cell
+	 */
 	public String showPlayers() {
 		String msg = "";
 		if (!empty()) {
@@ -193,7 +227,16 @@ public class Cell{
 		return msg;
 	}
 	
-	public String showPlayers(Player aux) {
+	
+	
+	/**
+	 * Auxiliary method of showPlayers, in order to continue recursion
+	 * <b> pre: </b> <br>
+	 * <b> pos: </b> <br>
+	 * @param aux, next player to get information from
+	 * @return msg, String that contains the symbols of the rest of players in the cell 
+	 */
+	private String showPlayers(Player aux) {
 		String msg = "";
 		if (aux != firstPlayer) {
 			msg = aux.getSymbol();

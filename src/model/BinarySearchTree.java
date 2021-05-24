@@ -20,6 +20,14 @@ public class BinarySearchTree implements Serializable {
 		this.root = root;
 	}
 	//Methods to add players that won the game-------------------------------------------
+	
+	
+	/**
+	 * It adds a new Winner to the binary search tree
+	 * <b> pre: </b> <br>
+	 * <b> pos: </b> the BST has a new element<br>
+	 * @param newWinner, new winner to add
+	 */
 	public void addWinner(Winner newWinner) {
 //		Winner newWinner = new Winner(symbol, nickname, score, game);	
 		if (root == null) {
@@ -30,6 +38,13 @@ public class BinarySearchTree implements Serializable {
 		}
 	}
 	
+	/**
+	 * Auxiliary method of addWiner, to continue recursion for finding the position
+	 * <b> pre: </b> <br>
+	 * <b> pos: </b> the BST has a new element<br>
+	 * @param newWinner, new winner to add
+	 * @param curreWinner, the winner to check next element 
+	 */
 	private void addWinner(Winner curreWinner, Winner newWinner) {
 		if (newWinner.getScore() >= curreWinner.getScore()) {
 			
@@ -52,25 +67,15 @@ public class BinarySearchTree implements Serializable {
 	}
 	//---------------------------------------------------------------------------------
 	
-    //Method to traverse the tree in inOrden------------------------------------------------------
-	public void inOrden(Winner winner) {
-		if (root != null) {
-			
-			if (winner.left != null) {
-				inOrden(winner.left);
-			}
-			
-			System.out.println(winner + "\n");
-			
-			if (winner.right != null) {
-				inOrden(winner.right);
-			}
-		}
-	}
-	//---------------------------------------------------------------------------------
-	
-	//Method to show the content of the tree 
+	//Method to show the content of the tree, traversing in inOrder
 		
+	/**
+	 * It collects the information into a String through inOrder traversing in the BST 
+	 * <b> pre: </b> <br>
+	 * <b> pos: </b> <br>
+	 * @param root, root element of the BST
+	 * @return result, a String that contains the information of BST in descendant order 
+	 */
 	public String showTree(Winner root){
 	    String result = "";
 	    if (root == null)
