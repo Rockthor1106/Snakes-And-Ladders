@@ -49,6 +49,13 @@ public class GameGrid {
 	}
 	
 	//methods to create the matrix when the rows number is even---------------------------------
+	/**<b> Method to create matrix rows when the rows number is even </b><br>
+	 * <b> pre: </b> <br>
+	 * <b> pos: </b> <br>
+	 * @param i An integer that represents the row number <br>
+	 * @param j An integer that represents the column number <br>
+	 * @param currentFirstRow An objects of Cell type that corresponds to the first cell in every row <br>
+	 */
 	private void createRow(int i, int j, Cell currentFirstRow) {
 		createCol(i, j + 1, currentFirstRow, currentFirstRow.getUp());
 		if (i < numRows) {
@@ -70,7 +77,15 @@ public class GameGrid {
 			}
 		}
 	}
-
+	
+	/**<b> Method to create the matrix columns and it is a helper method of createRow to create the matrix </b><br>
+	 * <b> pre: </b> <br>
+	 * <b> pos: </b> <br>
+	 * @param i An integer that represents the row number <br>
+	 * @param j An integer that represents the column number <br>
+	 * @param prev An object of Cell type that represents the cell that is before to the current cell <br>
+	 * @param rowPrev An object of Cell type that represents the cell up of the current cell <br>
+	 */
 	private void createCol(int i, int j, Cell prev, Cell rowPrev) {
 		if (j <= numColumns) {
 				
@@ -107,6 +122,13 @@ public class GameGrid {
 	//-------------------------------------------------------------------------------------------
 	
 	//methods to create the matrix when the rows number is odd---------------------------------
+	/**<b> Method to create matrix rows when the rows number is odd </b><br>
+	 * <b> pre: </b> <br>
+	 * <b> pos: </b> <br>
+	 * @param i An integer that represents the row number <br>
+	 * @param j An integer that represents the column number <br>
+	 * @param currentFirstRow An objects of Cell type that corresponds to the first cell in every row <br>
+	 */
 	private void createRow2(int i, int j, Cell currentFirstRow) {
 		createCol2(i, j + 1, currentFirstRow, currentFirstRow.getUp());
 		if (i < numRows) {
@@ -129,7 +151,15 @@ public class GameGrid {
 			}
 		}
 	}
-		
+	 
+	/**<b> Method to create the matrix columns and it is a helper method of createRow2 to create the matrix </b><br>
+	 * <b> pre: </b> <br>
+	 * <b> pos: </b> <br>
+	 * @param i An integer that represents the row number <br>
+	 * @param j An integer that represents the column number <br>
+	 * @param prev An object of Cell type that represents the cell that is before to the current cell <br>
+	 * @param rowPrev An object of Cell type that represents the cell up of the current cell <br>
+	 */
 	private void createCol2(int i, int j, Cell prev, Cell rowPrev) {
 		if (j <= numColumns) {
 				
@@ -192,6 +222,7 @@ public class GameGrid {
     //-----------------------------------------------------------------------------------------
 	
 	//Methods to show the grid in initial state------------------------------------------------
+	//this methods are basically others toString methods with other name
 	public String initialGrid() {
 		String msg;
 		msg = initialGridRow(first);
@@ -218,6 +249,13 @@ public class GameGrid {
 	//----------------------------------------------------------------------------------------
 	
 	//Methods to search a cell by number-------------------------------------------------------
+	/** <b> Method to search in rows a cell by number </b><br>
+	 * <b> pre: </b> number is a number between numRows * numColumns <br>
+	 * <b> pos: </b> <br>
+	 * @param number An integer, It represents a cell number <br>
+	 * @param first An object of Cell type, It represents the first cell <br>
+	 * @return A cell that corresponds with the number received as parameter <br>
+	 */
 	public Cell searchInRows(int number, Cell first) {
 		Cell foundCell = null;
 		foundCell = searchInCols(number, first.getNext());
@@ -234,6 +272,13 @@ public class GameGrid {
 		return foundCell;
 	}
 
+	/** <b> This method search in columns a cell by number </b><br>
+	 * <b> pre: </b> number is a number between numRows * numColumns <br>
+	 * <b> pos: </b> <br>
+	 * @param number An integer, It represents a cell number <br>
+	 * @param next An object of Cell type, It represents the cell that is next to the current cell <br>
+	 * @return A cell that corresponds with the number received as parameter <br>
+	 */
 	private Cell searchInCols(int number, Cell next) {
 		Cell foundNode = null;
 		if (next.getNumber() == number) {
@@ -249,9 +294,14 @@ public class GameGrid {
     //----------------------------------------------------------------------------------------
 	
 	//Methods to search a snake---------------------------------------------------------------
-	/**the parameter Cell first is not the first cell of the game grid, 
-	instead of this it is the first cell depending on row number - 1.
-	I mean, bottom row**/
+	/** <b> Method to search in rows a snake by its char </b><br>
+	 * <b> pre: </b> the parameter Cell first is not the first cell of the game grid, 
+		instead of this it is the first cell depending on row number - 1. I mean, bottom row <br>
+	 * <b> pos: </b> <br>
+	 * @param snake A char that represents a snake within game <br>
+	 * @param first An object of Cell type that corresponds to the first cell <br>
+	 * @return A cell whose snakes attribute corresponds with the char received as parameter <br>
+	 */
 	public Cell searchInRows(char snake, Cell first) {
 		Cell foundCell = null;
 		foundCell = searchInCols(snake, first.getNext());
@@ -270,6 +320,13 @@ public class GameGrid {
 		return foundCell;
 	}
 
+	/** <b> Method to search in columns a snake by its char </b><br>
+	 * <b> pre: </b> next is not null <br>
+	 * <b> pos: </b> <br>
+	 * @param snake A char that represents a snake within game <br>
+	 * @param next An object of Cell type that corresponds to the cell next to the current cell <br>
+	 * @return A cell whose snakes attribute corresponds with the char received as parameter <br>
+	 */
 	private Cell searchInCols(char snake, Cell next) {
 		Cell foundCell = null;
 			if (next.getSnake() == snake) {
@@ -286,6 +343,15 @@ public class GameGrid {
  	//--------------------------------------------------------------------------------------
 		
 	//Methods to search a ladder------------------------------------------------------------
+	/** <b> Method to search in rows a ladder by its number </b><br>
+	 * <b> pre: </b> row must be a integer between the range of row number <br>
+	 * <b> pos: </b> <br>
+	 * @param i An integer that represents the current row number it will use as a counter <br>
+	 * @param row An integer that represent the number row where is the start of the ladder <br>
+	 * @param first An object of Cell type that corresponds to the first cell <br>
+	 * @param ladder An integer that represents a ladder <br>
+	 * @return A cell whose ladder attribute corresponds with the char received as parameter <br>
+	 */
 	public Cell searchInRows(int i, int row, Cell first, int ladder) {
 		Cell foundCell = null;
 		foundCell = searchInCols(first.getNext(), ladder);
@@ -304,6 +370,13 @@ public class GameGrid {
 		return foundCell;
 	}
 
+	/** <b> Method to search in columns a ladder by its number </b><br>
+	 * <b> pre: </b> next is not null <br>
+     * <b> pos: </b> <br>
+	 * @param next An object of Cell type that corresponds to the cell next to the first cell <br>
+	 * @param ladder An integer that represents a ladder <br>
+	 * @return A cell whose ladder attribute corresponds with the char received as parameter <br>
+	 */
 	private Cell searchInCols(Cell next, int ladder) {
 		Cell foundCell = null;
 			if (next.getLadder() == ladder) {
@@ -319,6 +392,12 @@ public class GameGrid {
 	//-----------------------------------------------------------------------------------------
 	
 	//Method to search the first cell depending on number of row-------------------------------
+	/** <b> Method to search the first corresponding to an specific row number </b><br>
+	 * *<b> pre: </b> row must be an integer between the row number range <br>
+	 * @param row An integer that represent the row number where we want to get the first cell <br>
+	 * @param first An object of Cell type that corresponds to the first cell when the matrix is created <br>
+	 * @return The first cell at the row number received as parameter <br>
+	 */
 	public Cell searchFirst(int row, Cell first) {
 		Cell foundCell = null;
 		if(foundCell == null){
@@ -336,6 +415,12 @@ public class GameGrid {
 	//--------------------------------------------------------------------------------------------
 	
 	//Method to move players------------------------------------------------------------------
+	/** <b> Method to move the player in the game grid </b><br>
+	 * <b> pre: </b> Player is not null <br>
+	 * <b> pos: </b> the player is assigned in the final cell which is defined using the current player position and dice <br>
+	 * @param player An object of Player type, it represents a player within a cell <br>
+	 * @param dice An integer, it is a random number between 1 and 6 <br>
+	 */
 	public void movePlayer(Player player, int dice) {
 				
 		int initialPos = player.getPosition();
