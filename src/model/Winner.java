@@ -3,10 +3,7 @@ package model;
 import java.io.Serializable;
 
 public class Winner extends Player implements Serializable {
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	
 	private String nickname;

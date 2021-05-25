@@ -32,11 +32,11 @@ public class SnakesAndLadders {
 	}
 	
 	/**
-	 * This method serializes the best players contained in bstWinners 
+	 * <b> This method serializes the best players contained in bstWinners </b><br>
 	 * <b> pre: </b> <br>
 	 * <b> pos: </b> <br>
-	 * @throws FileNotFoundException
-	 * @throws IOException
+	 * @throws FileNotFoundException <br>
+	 * @throws IOException <br>
 	 */
 	public void saveWinners() throws FileNotFoundException, IOException {
 		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SAVE_PATH_FILE_WINNER));
@@ -45,12 +45,12 @@ public class SnakesAndLadders {
 	}
 	
 	/**
-	 * This method loads the best winners contained in the serialized object specified in the path
+	 * <b> This method loads the best winners contained in the serialized object specified in the path </b><br>
 	 * <b> pre: </b> <br>
 	 * <b> pos: </b> <br>
-	 * @throws FileNotFoundException
-	 * @throws IOException
-	 * @throws ClassNotFoundException
+	 * @throws FileNotFoundException <br>
+	 * @throws IOException <br>
+	 * @throws ClassNotFoundException <br>
 	 */
 	public void loadWinners() throws FileNotFoundException, IOException, ClassNotFoundException {
 		
@@ -64,13 +64,13 @@ public class SnakesAndLadders {
 	}
 	
 	/**
-	 * This method separates the entry given by the user and calls the required methods to start the game <br>
+	 * <b> This method separates the entry given by the user and calls the required methods to start the game </b><br>
 	 * <b> pre: </b> the entry follows the format rows columns snakes ladders players(number or symbols) <br>
-	 * <b> pos: gameboard is assigned, linked list strted by firstPlayer isn't empty </b> 
-	 * @param entry, given by the user. entry != null, entry != ""
-	 * @return 0 when the entry is correct,
+	 * <b> pos: </b> gameboard is assigned, linked list started by firstPlayer isn't empty </b> 
+	 * @param entry, given by the user. entry != null, entry != "" <br>
+	 * @return 0 when the entry is correct, 
 	 * 1 when the snakes and ladders don't fit the grid,
-	 * 2 when there's more than 9 players
+	 * 2 when there's more than 9 players <br>
 	 */
 	
 	public int separateEntry(String entry) {
@@ -108,12 +108,10 @@ public class SnakesAndLadders {
 		return 0;
 	}
 	
-	
-	
 	/**
-	 * This method creates the gameboard with the specifications given by the user, number of snakes and ladders. <br>
+	 * <b> This method creates the gameboard with the specifications given by the user, number of snakes and ladders. </b><br>
 	 * <b> pre: </b> rows and columns != null, integers <br>
-	 * <b> pos: </b> attribute gameBoard is assigned 
+	 * <b> pos: </b> attribute gameBoard is assigned <br>
 	 */
 	private void createBoard() {
 		gameBoard = new GameGrid(rows, columns);
@@ -129,9 +127,9 @@ public class SnakesAndLadders {
 	}
 	
 	/**
-	 * This method sets all the players in the beginning of the game board <br>
+	 * <b> This method sets all the players in the beginning of the game board </b><br>
 	 * <b> pre: </b> firstPlayer!= null <br>
-	 * <b> pos: </b> all the players in the linked list have the property "position" set in 1
+	 * <b> pos: </b> all the players in the linked list have the property "position" set in 1 <br>
 	 */
 	private void setPlayersStart() {
 		if(firstPlayer==null) {
@@ -151,10 +149,10 @@ public class SnakesAndLadders {
 	
 	
 	/**
-	 * This method is an auxiliary for setPlayersStart, in order to continue the recursion <br>
+	 * <b> This method is an auxiliary for setPlayersStart, in order to continue the recursion </b><br>
 	 * <b> pre: </b> <br>
-	 * <b> pos: </b> 
-	 * @param add it's the player that is going to be added to Cell number 1
+	 * <b> pos: </b>  <br>
+	 * @param add it's the player that is going to be added to Cell number 1 <br>
 	 */
 	private void setPlayersStart(Player add) {
 		
@@ -172,10 +170,10 @@ public class SnakesAndLadders {
 	
 	
 	/**
-	 * This method generates a random symbol of the following:  * ! O X % $ # + &
+	 * <b> This method generates a random symbol of the following:  * ! O X % $ # + & </b><br>
 	 * <b> pre: </b> <br>
 	 * <b> pos: </b> <br>
-	 * @return symbol, which is a String with the symbol generated
+	 * @return symbol, which is a String with the symbol generated <br>
 	 */
 	public String generateSymbols() {
 		int symbol_number = (int) (Math.random() * 9 + 1);
@@ -224,12 +222,12 @@ public class SnakesAndLadders {
 	
 	
 	/**
-	 * This metho verifies if some player in the game has the specified symbol in the parameter
+	 * <b> This metho verifies if some player in the game has the specified symbol in the parameter </b><br>
 	 * <b> pre: </b> <br>
 	 * <b> pos: </b> <br>
-	 * @param first, it's the first player added to the game, in order to start recursion
-	 * @param symbol, it's the symbol that it's been searched for
-	 * @return a boolean, true if it was found, false otherwise 
+	 * @param first, it's the first player added to the game, in order to start recursion <br>
+	 * @param symbol, it's the symbol that it's been searched for <br>
+	 * @return a boolean, true if it was found, false otherwise  <br>
 	 */
 	public boolean symbolExist(Player first, String symbol) {
 		if(first == null) {
@@ -250,16 +248,14 @@ public class SnakesAndLadders {
 		int dices = (int) (Math.random() * 6 + 1); // random numbers between 1 and 6
 		return dices;
 	}
-	
-	
-	
+
 	/**
-	 * This method creates the number of players contained in a String, without spaces in between
-	 * and identified by their symbol <br>
-	 * <b> pre: </b><br>
-	 * <b> pos: </b> the linked list initiated by firstPlayer now contains symbol.length players
-	 * @param symbol is the string that contains the symbols for the players
-	 * @param num it's an auxiliary parameter to iterate through the String
+	 * <b> This method creates the number of players contained in a String, without spaces in between
+	 * and identified by their symbol </b><br>
+	 * <b> pre: </b> symbol must be an String that contains the symbols enable in the game <br>
+	 * <b> pos: </b> the linked list initiated by firstPlayer now contains symbol.length players <br>
+	 * @param symbol is the string that contains the symbols for the players <br>
+	 * @param num it's an auxiliary parameter to iterate through the String <br>
 	 */
 	public void createPlayers(String symbol, int num) {
 	
@@ -271,12 +267,11 @@ public class SnakesAndLadders {
 		}
 	}
 	
-	
 	/**
-	 * This method creates a given number of players, each one identified by a different symbol
-	 * <b> pre: </b>  <br>
+	 * <b> This method creates a given number of players, each one identified by a different symbol </b><br>
+	 * <b> pre: </b> <br>
 	 * <b> pos: </b> the linked list initiated by firstPlayer now contains num players <br>
-	 * @param num it's the number of players that will be created
+	 * @param num it's the number of players that will be created <br>
 	 */
 	public void createPlayersRandom(int num) {
 		
@@ -288,10 +283,10 @@ public class SnakesAndLadders {
 	}
 	
 	/**
-	 * addPlayer adds a specified player to the circular linked list started and contained in firstPlayer
+	 * <b> addPlayer adds a specified player to the circular linked list started and contained in firstPlayer </b><br>
 	 * <b> pre: </b> <br>
 	 * <b> pos: </b> firstPlayer!= null and the circular linked list has a new element <br>
-	 * @param newPlayer the player that is going to be added 
+	 * @param newPlayer the player that is going to be added <br>
 	 */
 	public void addPlayer(Player newPlayer) {
 
@@ -305,11 +300,11 @@ public class SnakesAndLadders {
 	}
 
 	/**
-	 * auxiliary method for addPlayer in order to continue recursion
+	 * <b> auxiliary method for addPlayer in order to continue recursion </b><br>
 	 * <b> pre: </b> <br>
 	 * <b> pos: </b> firstPlayer!= null and the circular linked list has a new element <br>
-	 * @param current player to verify its next element
-	 * @param newPlayer player that is going to be added 
+	 * @param current player to verify its next element <br>
+	 * @param newPlayer player that is going to be added <br>
 	 */
 	private void addPlayer(Player current, Player newPlayer) {
 
@@ -322,13 +317,12 @@ public class SnakesAndLadders {
 
 	}
 	
-	
 	/**
-	 * This method creates a defined number of snakes in random cells
+	 * <b> This method creates a defined number of snakes in random cells </b><br>
 	 * <b> pre: </b> gameboard is initialized and contains a GameGrid <br>
 	 * <b> pos: </b> random cells of gambeboard have the attribute snake set and different than '' <br>
-	 * @param code it's the ASCII code for the letter A
-	 * @param max it's the ASCII code of the last snake to create, calculated as: letter A's ASCII code + number of snakes -1
+	 * @param code it's the ASCII code for the letter A <br>
+	 * @param max it's the ASCII code of the last snake to create, calculated as: letter A's ASCII code + number of snakes -1 <br>
 	 */
 	public void createSnakes(int code, int max) {
 		
@@ -354,11 +348,11 @@ public class SnakesAndLadders {
 	}
 	
 	/**
-	 * This method creates a defined number of ladders in random cells
+	 * <b> This method creates a defined number of ladders in random cells </b><br>
 	 * <b> pre: </b> gameboard is initialized and contains a GameGrid <br>
 	 * <b> pos: </b> random cells of gambeboard have the attribute ladder set and different than 0 <br>
-	 * @param code it's number 1, in order to start recursion
-	 * @param max it's maximum number of ladders that the game will contain 
+	 * @param code it's number 1, in order to start recursion <br>
+	 * @param max it's maximum number of ladders that the game will contain <br>
 	 */
 	public void createLadders(int ladder, int max) {
 		
@@ -383,15 +377,13 @@ public class SnakesAndLadders {
 			
 	}
 	
-	
-	
 	/**
-	 * This method creates one ladder with the cells given (identified by number in the GameGrid) and the number of ladder
+	 * <b> This method creates one ladder with the cells given (identified by number in the GameGrid) and the number of ladder </b><br>
 	 * <b> pre: </b> gameboard is initialized and contains a GameGrid  <br>
 	 * <b> pos: </b> the specified cells have the attribute ladder set and different from 0 <br>
-	 * @param start the number of the cell where the ladder starts. 
-	 * @param end the number of the cell where the ladder ends. 
-	 * @param ladder ladder identifier. 
+	 * @param start the number of the cell where the ladder starts. <br>
+	 * @param end the number of the cell where the ladder ends. <br>
+	 * @param ladder ladder identifier. <br>
 	 */
 	public void createSingleLadder(int start, int end, int ladder) {
 		gameBoard.searchInRows(start, gameBoard.getFirst()).setLadder(ladder);
@@ -401,12 +393,12 @@ public class SnakesAndLadders {
 	}
 	
 	/**
-	 * This method creates one snake with the cells given (identified by number in the GameGrid) and the letter for the snake
-	 * <b> pre: gameboard is initialized and contains a GameGrid </b> <br>
-	 * <b> pos: the specified cells have the attribute snake set and different than '' </b> <br>
-	 * @param start the number of the cell where the snake starts.
-	 * @param end, the number of the cell where the snake ends. 
-	 * @param code, the ASCII code which corresponds to the letter that identifies the snake
+	 * <b> This method creates one snake with the cells given (identified by number in the GameGrid) and the letter for the snake </b><br>
+	 * <b> pre: </b> gameboard is initialized and contains a GameGrid  <br>
+	 * <b> pos: </b> the specified cells have the attribute snake set and different than ''  <br>
+	 * @param start the number of the cell where the snake starts. <br>
+	 * @param end, the number of the cell where the snake ends. <br>
+	 * @param code, the ASCII code which corresponds to the letter that identifies the snake <br>
 	 */
 	public void createSingleSnake(int start, int end, int code) {
 		gameBoard.searchInRows(start, gameBoard.getFirst()).setSnake((char)code);
@@ -416,11 +408,11 @@ public class SnakesAndLadders {
 	}
 
 	/**
-	 * It returns a random cell from the gameboard that is located in a different row from the parameter given
-	 * <b> pre: gameboard is initialized </b>  <br>
-	 * <b> pos: </b> <br>
-	 * @param row, it's the row where the random cell won't be gotten from
-	 * @return a Cell from gameboard
+	 * <b> It returns a random cell from the gameboard that is located in a different row from the parameter given </b><br>
+	 * <b> pre: </b> gameboard is initialized <br>
+	 * <b> pos: </b> a random cell number is returned between rows * columns <br>
+	 * @param row, it's the row where the random cell won't be gotten from <br>
+	 * @return a Cell from gameboard <br>
 	 */
 	public int getRandomCell(int row) {
 		
@@ -443,13 +435,11 @@ public class SnakesAndLadders {
 		}
 	}
 	
-	
-	
 	/**
-	 * This method generates a random integer between 1 and rows * columns
+	 * <b> This method generates a random integer between 1 and rows * columns </b><br>
 	 * <b> pre: </b> <br>
 	 * <b> pos: </b> <br>
-	 * @return random, which is the random generated integer
+	 * @return random, which is the random generated integer <br>
 	 */
 	public int getRandom() {
 		

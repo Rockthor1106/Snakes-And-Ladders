@@ -68,10 +68,5 @@ public class Player implements Serializable {
 	public void setNextPlayerGen(Player nextPlayerGen) {
 		this.nextPlayerGen = nextPlayerGen;
 	}
-	
-//	public String toString() {
-//		String msg = "";
-//		msg = nextPlayer.getSymbol() ;
-//		return msg;
-//	}
+
 }
