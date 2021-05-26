@@ -18,6 +18,7 @@ it has a maximum of 9 players and they can arrange the game board as they please
 >     * [Screenshots](#screenshots)
 >   * [Code](#code)
 >     * [Description](#description)
+>   * [Changelog](https://github.com/Rockthor1106/Snakes-And-Ladders/blob/master/Changelog.md) 
 >   * [Resources (Documentation and other links)](#resources-documentation-and-other-links)
 >   * [Contributors](#contributors)
 
