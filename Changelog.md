@@ -1,0 +1,9 @@
+# Snakes and Ladders - Changelog
+
+## :pushpin: Milestone 2
+
+Los cambios realizados desde Milestone 1 están reflejados en la tabla con el criterio y el cambio realizado
+
+| En el repositorio hay un proyecto de eclipse, con los directorios bin, src, data y docs.  En el mismo directorio docs se encuentra el directorio api con el javadoc generado. | Diagrama de clases                                                         | El programa permite jugar con todas las opciones y su implementación  no tiene ningún arreglo salvo el del split en la lectura del n, m, s, e y p. | El programa permite jugar con todas las opciones y su implementación no  tiene absolutamente ningún ciclo (ni for, ni while, ni do-while) |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| Se realizó la generación de la documentación Javadoc                                                                                                                          | Se hizo correcciones en las relaciones y en  especificaciones del diagrama | Ya no quedan jugadores del juego anterior al iniciar una nueva partida                                                                             | Ya no quedan jugadores del juego anterior al iniciar una nueva partida                                                                    |
